@@ -101,6 +101,7 @@ public class Interface extends JFrame implements ActionListener {
             System.exit(0);
         }else if(source == AC) {
             eingabe.setText(null);
+            
         } else if(source == equals) {
         	try {
                 if (!eingabe.getText().equals(""))
