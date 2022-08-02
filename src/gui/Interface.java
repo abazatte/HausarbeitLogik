@@ -207,7 +207,8 @@ public class Interface extends JFrame implements ActionListener {
         this.plus.setFont(new Font("Arial", Font.PLAIN, 40));
         this.panel.add(plus);
 
-        this.platzhalter = new JButton();
+        this.platzhalter = new JButton("Plot");
+        this.platzhalter.setFont(new Font("Arial", Font.PLAIN, 40));
         this.panel.add(this.platzhalter);
 
         numbers[0] = new JButton(0 + "");
@@ -228,6 +229,7 @@ public class Interface extends JFrame implements ActionListener {
     }
 
     private void entry1() {
+    	System.out.println(this.entry1);
         this.entry1 = Double.parseDouble(eingabe.getText());
         eingabe.setText(null);
     }
