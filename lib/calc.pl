@@ -32,3 +32,9 @@ cosinus(X, Z):-
 	
 sinus(X, Z):-
 	Z is sin(X).
+	
+minus_list([],0).
+
+minus_list([H|T], Sum) :-
+	minus_list(T, Rest),
+	Sum is H - Rest.

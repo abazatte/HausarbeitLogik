@@ -6,18 +6,18 @@ import org.jpl7.Variable;
 
 import java.util.Map;
 
-public class Multiplication extends Command {
-    public Map<String, Term> execute(double a, double b) {
-        Variable z = new Variable("Z");
-        Term term = Term.textToTerm("multiplication(" + a + "," + b + "," + z + ")");
-        Query multiplication = new Query(term);
-        Map<String, Term> sol = multiplication.allSolutions()[0];
-        multiplication.close();
-        return sol;
-    }
+public class Multiplication implements Command {
+	public Map<String, Term> execute(double a, double b) {
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("multiplication(" + a + "," + b + "," + z + ")");
+		Query multiplication = new Query(term);
+		Map<String, Term> sol = multiplication.allSolutions()[0];
+		multiplication.close();
+		return sol;
+	}
 
-    @Override
-    public String toString() {
-        return "*";
-    }
+	@Override
+	public String toString() {
+		return "*";
+	}
 }
