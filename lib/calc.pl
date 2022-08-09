@@ -51,6 +51,9 @@ tan(X,Z):-
 exponential(E, Z):-
 	Z is exp(E).
 	
+ln(E,Z):-
+	Z is log(E).
+	
 minus_list([],0).
 
 minus_list([H|T], Sum) :-
