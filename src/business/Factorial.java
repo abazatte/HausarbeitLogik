@@ -14,6 +14,6 @@ public class Factorial implements Command {
 		Query fak = new Query(term);
 		Map<String, Term> solutionMap = fak.allSolutions()[0];
 		fak.close();
-		return PrologFormattingHelper.extractDouble(solutionMap.toString());;
+		return PrologFormattingHelper.extractDouble(solutionMap.toString());
 	}
 }

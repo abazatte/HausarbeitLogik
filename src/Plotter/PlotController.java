@@ -8,62 +8,76 @@ import java.util.stream.Collectors;
 import com.github.sh0nk.matplotlib4j.NumpyUtils;
 import com.github.sh0nk.matplotlib4j.Plot;
 
+import business.Sinus;
+
 public class PlotController {
-    private Plot plot;
+	private Plot plot;
 
-    public PlotController() {
-        this.plot = Plot.create();
-    }
+	public PlotController() {
+		this.plot = Plot.create();
+	}
 
-    public void setXLabel(String label) {
-        this.plot.xlabel(label);
-    }
+	public void setXLabel(String label) {
+		this.plot.xlabel(label);
+	}
 
-    public void setYLabel(String label) {
-        this.plot.ylabel(label);
-    }
+	public void setYLabel(String label) {
+		this.plot.ylabel(label);
+	}
 
-    public void setTitle(String title) {
-        this.plot.title(title);
-    }
+	public void setTitle(String title) {
+		this.plot.title(title);
+	}
 
-    public void legendeAnzeigen() {
-        this.plot.legend();
-    }
+	public void legendeAnzeigen() {
+		this.plot.legend();
+	}
 
-    public void plotAnzeigen() {
-        try {
-            this.plot.show();
-        } catch (Exception e) {
-            System.out.println("Fehler beim generieren des Plots");
-        }
-    }
+	public void plotAnzeigen() {
+		try {
+			this.plot.show();
+		} catch (Exception e) {
+			System.out.println("Fehler beim generieren des Plots");
+		}
+	}
 
-    public List<Double> werteEinlesen(double... werte) {
-        List<Double> tmp = new ArrayList<>();
+	public List<Double> werteEinlesen(double... werte) {
+		List<Double> tmp = new ArrayList<>();
 
-        // Werte die reinkommen in die liste speichern
-        for(double wert : werte) {
-            tmp.add(wert);
-        }
+		// Werte die reinkommen in die liste speichern
+		for (double wert : werte) {
+			tmp.add(wert);
+		}
 
-        return tmp;
-    }
+		return tmp;
+	}
 
-    public void testDaten() {
-         List<Double> x = NumpyUtils.linspace(-Math.PI, Math.PI, 256);
-         List<Double> C = x.stream().map(Math::cos).collect(Collectors.toList());
-         List<Double> S = x.stream().map(Math::sin).collect(Collectors.toList());
+	public void testDaten() {
+		List<Double> x = NumpyUtils.linspace(-Math.PI, Math.PI, 256);
+		
+		// List<Double> C = x.stream().map(Math::cos).collect(Collectors.toList());
+		// List<Double> S = x.stream().map(Math::sin).collect(Collectors.toList());
+		// List<Double> cock = x.stream().map(Math::).collect(Collectors.toList());
+		
+		Sinus s = new Sinus();
+		List<Double> werte = new ArrayList<Double>();
 
-         // Testi Test
-         this.plot.plot().add(Arrays.asList(3,5)).linestyle("-");
-         this.setXLabel("X-Achse");
-         this.setYLabel("Y-Achse");
-         this.setTitle("Das ist ein Test");
-         this.legendeAnzeigen();
-         this.plotAnzeigen();
-    }
+		for (Double d : x) {
+			// Ergebnis hier:
+			String erg = (s.execute(d, d)).toString(); // Hier steht das Ergebnis von Prolog
+			int start = erg.indexOf("=");
+			int end = erg.indexOf("}");
+			
+			werte.add(Double.parseDouble(erg.substring(start + 1, end))) ;
+		}
 
-
+		// Testi Test
+		this.plot.plot().add(werte).linestyle("-");
+		this.setXLabel("X-Achse");
+		this.setYLabel("Y-Achse");
+		this.setTitle("Das ist ein Test");
+		this.legendeAnzeigen();
+		this.plotAnzeigen();
+	}
 
 }

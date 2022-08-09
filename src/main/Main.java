@@ -21,27 +21,7 @@ public class Main {
         initialize();
     	new Interface();
     }
-    
-    /*public static void main(String[] args) throws PythonExecutionException, IOException {
 
-        List<Double> x = NumpyUtils.linspace(-Math.PI, Math.PI, 256);
-        List<Double> C = x.stream().map(Math::cos).collect(Collectors.toList());
-        List<Double> S = x.stream().map(Math::sin).collect(Collectors.toList());
-
-        Plot plt = Plot.create();
-        plt.plot()
-               // .add(C)
-                .add(S)
-                .label("label")
-                .linestyle("-");
-        plt.xlabel("xlabel");
-        plt.ylabel("ylabel");
-        plt.text(0.5, 0.2, "text");
-        plt.title("Title!");
-        plt.legend();
-        plt.show();
-    }*/
-	
     private static void initialize() {
     	JPL.init();
         Query q1 = new Query("consult", new Term[]{new Atom("lib/calc.pl")});

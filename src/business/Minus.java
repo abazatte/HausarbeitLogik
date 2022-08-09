@@ -14,7 +14,7 @@ public class Minus implements Command {
 		Query minus = new Query(term);
 		Map<String, Term> sol = minus.allSolutions()[0];
 		minus.close();
-		return PrologFormattingHelper.extractDouble(sol.toString());;
+		return PrologFormattingHelper.extractDouble(sol.toString());
 	}
 
 	@Override
