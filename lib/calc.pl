@@ -1,6 +1,18 @@
 add(X, Y, Z) :-
 	Z is X + Y.
 	
+summe([],0).
+summe([H|T],Sum) :-
+	summe(T,Rest),
+	Sum is H + Rest.
+	
+multip([],0).
+multip([H],H).
+multip([H|T],Prod) :-
+	multip(T,Rest),
+	Prod is H * Rest.
+
+	
 power(X,Y,Z) :-  
     Z is X**Y.
 	
