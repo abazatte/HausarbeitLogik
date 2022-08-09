@@ -32,6 +32,9 @@ cosinus(X, Z):-
 	
 sinus(X, Z):-
 	Z is sin(X).
+	
+tan(X,Z):-
+	Z is tan(X).
 	 
 exponential(E, Z):-
 	Z is exp(E).
