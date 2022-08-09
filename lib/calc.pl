@@ -32,6 +32,9 @@ cosinus(X, Z):-
 	
 sinus(X, Z):-
 	Z is sin(X).
+	 
+exponential(E, Z):-
+	Z is exp(E).
 	
 minus_list([],0).
 
