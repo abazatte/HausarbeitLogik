@@ -23,7 +23,8 @@ public class Interface extends JFrame implements ActionListener {
 	private static double MIN = -100;
 	private static double MAX = 100;
 
-	//TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables machen
+	// TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables
+	// machen
 	private JButton plus, minus, modulo, division, power, multiplication, squareRoot, fak, equals, AC, exit, cosinus,
 			sinus, pi, testButton, euler, klammerAufButton, klammerZuButton, deleteLastButton;
 
@@ -46,8 +47,8 @@ public class Interface extends JFrame implements ActionListener {
 
 	private double rangeVonX;
 	private double rangeBisX;
-	private double rangeVonY;
-	private double rangeBisY;
+	// private double rangeVonY; Haram wird errechnet
+	// private double rangeBisY; Haram wird errechnet
 
 	private PlotController plotController;
 	private List<Double> x; // Hilfsliste
@@ -151,61 +152,53 @@ public class Interface extends JFrame implements ActionListener {
 	 */
 	private void initTextFelder() {
 
-		/*
-		 * this.fieldRangeVonX = new JTextField("-5"); this.fieldRangeBisX = new
-		 * JTextField("5"); this.fieldRangeVonY = new JTextField("-5");
-		 * this.fieldRangeBisY = new JTextField("5");
-		 * 
-		 * this.labelRangeVonX = new JLabel("Von X: "); this.labelRangeBisX = new
-		 * JLabel("Bis X: ");
-		 * 
-		 * this.labelRangeVonY = new JLabel("Von Y: "); this.labelRangeBisY = new
-		 * JLabel("Bis Y: ");
-		 * 
-		 * // Fuer Umbruch this.panel.add(new JButton());
-		 * 
-		 * // Delete Button this.deleteLastButton = new JButton("DEL");
-		 * this.deleteLastButton.addActionListener(this);
-		 * this.deleteLastButton.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(deleteLastButton);
-		 * 
-		 * // Label Zentrieren
-		 * this.labelRangeVonX.setHorizontalAlignment(JTextField.CENTER);
-		 * this.labelRangeBisX.setHorizontalAlignment(JTextField.CENTER);
-		 * this.labelRangeVonY.setHorizontalAlignment(JTextField.CENTER);
-		 * this.labelRangeBisY.setHorizontalAlignment(JTextField.CENTER);
-		 * 
-		 * this.panel.add(labelRangeVonX); this.panel.add(fieldRangeVonX);
-		 * this.panel.add(labelRangeBisX); this.panel.add(fieldRangeBisX);
-		 * this.panel.add(labelRangeVonY); this.panel.add(fieldRangeVonY);
-		 * this.panel.add(labelRangeBisY); this.panel.add(fieldRangeBisY);
-		 * 
-		 * JButton confirmButton = new JButton("Werte uebernehmen");
-		 * this.panel.add(confirmButton);
-		 * 
-		 * // Wenn confirm Button geklickt wird, dann werden die Plot Werte: von, bis //
-		 * uebernommen.
-		 * 
-		 * confirmButton.addActionListener(e -> { try { this.rangeVonX =
-		 * Double.parseDouble(this.fieldRangeVonX.getText()); this.rangeBisX =
-		 * Double.parseDouble(this.fieldRangeBisX.getText()); this.rangeVonY =
-		 * Double.parseDouble(this.fieldRangeVonY.getText()); this.rangeBisY =
-		 * Double.parseDouble(this.fieldRangeBisY.getText());
-		 * 
-		 * if (rangeVonX > rangeBisX || rangeVonY > rangeBisY) { throw new
-		 * MinMaxException(); }
-		 * 
-		 * StringBuilder s = new StringBuilder();
-		 * s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).
-		 * append("\n")
-		 * .append("von Y: ").append(rangeVonY).append(" bis Y: ").append(rangeBisY).
-		 * append("\n") .toString(); System.out.println(s);
-		 * 
-		 * } catch (NumberFormatException nfe) { JOptionPane.showMessageDialog(null,
-		 * " Nur Zahlen eingeben! "); } catch (MinMaxException mme) {
-		 * JOptionPane.showMessageDialog(null,
-		 * " VON Werte duerfen nicht groesser als BIS Werte "); } });
-		 */
+		this.fieldRangeVonX = new HintTextField("Wert von X:");
+		this.fieldRangeBisX = new HintTextField("Wert bis X:");
+		this.fieldRangeVonY = new HintTextField("Wert von Y:");
+		this.fieldRangeBisY = new HintTextField("Wert bis Y:");
+		
+		// Dummy fuer Zeilenumbruch
+		this.panel.add(new JButton());
+
+		this.panel.add(fieldRangeVonX);
+		this.panel.add(fieldRangeBisX);
+		this.panel.add(fieldRangeVonY);
+		this.panel.add(fieldRangeBisY);
+		this.panel.add(new JButton());
+		JButton confirmButton = new JButton("OK");
+		this.panel.add(confirmButton);
+
+		// Wenn confirm Button geklickt wird, dann werden die Plot Werte: von, bis //
+		// uebernommen.
+
+		confirmButton.addActionListener(e -> {
+			try {
+				this.rangeVonX = Double.parseDouble(this.fieldRangeVonX.getText());
+				this.rangeBisX = Double.parseDouble(this.fieldRangeBisX.getText());
+				// this.rangeVonY = Double.parseDouble(this.fieldRangeVonY.getText()); wird errechnet
+				// this.rangeBisY = Double.parseDouble(this.fieldRangeBisY.getText()); wird errechnet
+
+				if (rangeVonX > rangeBisX ) {
+					throw new MinMaxException();
+				}
+				
+
+				StringBuilder s = new StringBuilder();
+				s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).append("\n")
+						.toString();
+				System.out.println(s);
+
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(null, " Nur Zahlen eingeben! ");
+			} catch (MinMaxException mme) {
+				JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte ");
+			}
+		});
+
+	}
+	
+	private void parseToParser(Double x, String input ) {
+		
 	}
 
 	private void initButtons() {
@@ -216,13 +209,13 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("AC"));
 		this.jButtonList.add(new JButton("←"));
 
-		this.jButtonList.add(new JButton("x^2"));
-		this.jButtonList.add(new JButton("1/x"));
-		this.jButtonList.add(new JButton("|x|"));
+		this.jButtonList.add(new JButton("sin"));
+		this.jButtonList.add(new JButton("cos"));
+		this.jButtonList.add(new JButton("tan"));
 		this.jButtonList.add(new JButton("exp"));
 		this.jButtonList.add(new JButton("mod"));
 
-		this.jButtonList.add(new JButton("√"));
+		this.jButtonList.add(new JButton("sqrt"));
 		this.jButtonList.add(new JButton("("));
 		this.jButtonList.add(new JButton(")"));
 		this.jButtonList.add(new JButton("n!"));
@@ -234,7 +227,7 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("9"));
 		this.jButtonList.add(new JButton("*"));
 
-		this.jButtonList.add(new JButton("10^x"));
+		this.jButtonList.add(new JButton("x^2"));
 		this.jButtonList.add(new JButton("4"));
 		this.jButtonList.add(new JButton("5"));
 		this.jButtonList.add(new JButton("6"));
