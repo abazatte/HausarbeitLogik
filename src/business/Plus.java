@@ -15,6 +15,7 @@ public class Plus implements Command {
 		Query add = new Query(term);
 		Map<String, Term> sol = add.allSolutions()[0];
 		add.close();
+		
 		return PrologFormattingHelper.extractDouble(sol.toString());
 	}
 
