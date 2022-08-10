@@ -20,8 +20,6 @@ public class Parser {
         str = "";
     }
 
-
-
     void nextChar() {
         //gucken ob die nächste pos kleiner als length ist, wir wollen ja im string/char array bleiben
         ch = (++pos < str.length()) ? str.charAt(pos) : -1;
@@ -77,30 +75,29 @@ public class Parser {
     double parseExpression() {
         //es wird erst parseTerm aufgerufen damit wir erst multiplikation und division machen!!!
         double x = parseTerm();
-        for (;;) {
+        while(checkNext('+') || checkNext('-')){
             if      (eat('+')) {
-            	x = new Plus().execute(x, parseTerm()); // addition
+                x = new Plus().execute(x, parseTerm()); // addition
             }
             else if (eat('-')) {
-            	x = new Minus().execute(x, parseTerm()); // subtraction
+                x = new Minus().execute(x, parseTerm()); // subtraction
             }
-            else return x;
         }
+        return x;
     }
 
     double parseTerm() {
         double x = parseFactor();
-        //das noch refactoren, while true mag kleuker nicht
-        for (;;) {
+        while(checkNext('*') || checkNext('/')) {
             if      (eat('*')) {
-            	x = new Multiplication().execute(x, parseFactor()); // multiplication
-            	
+                x = new Multiplication().execute(x, parseFactor()); // multiplication
+
             }
             else if (eat('/')) {
-            	x = new Division().execute(x, parseFactor()); // division
+                x = new Division().execute(x, parseFactor()); // division
             }
-            else return x;
         }
+        return x;
     }
 
 
