@@ -33,14 +33,30 @@ public class Parser {
      * @param charToEat
      * @return
      */
-    boolean eat(int charToEat) {
+    private boolean eat(int charToEat) {
         //spaces werden ignoriert ' ' == 32
-        while (ch == ' ') nextChar();
+        while (ch == ' ') {
+            nextChar();
+        }
         if (ch == charToEat) {
             nextChar();
             return true;
         }
         return false;
+    }
+
+    /**
+     * funktioniert genau so wie eat() aber ohne die position von ch tatsächlich zu verändern
+     *
+     * @param charToCheck
+     * @return
+     */
+    private boolean checkNext(int charToCheck){
+        int offset = 0;
+        while ((ch + offset) == ' '){
+            offset++;
+        }
+        return ch + offset == charToCheck;
     }
 
     public double parse(String str) {

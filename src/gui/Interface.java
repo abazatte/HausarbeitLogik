@@ -22,6 +22,7 @@ public class Interface extends JFrame implements ActionListener {
 	private static double MIN = -100;
 	private static double MAX = 100;
 
+	//TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables machen
 	private JButton plus, minus, modulo, division, power, multiplication, squareRoot, fak, equals, AC, exit, cosinus,
 			sinus, pi, testButton, euler;
 
@@ -81,6 +82,7 @@ public class Interface extends JFrame implements ActionListener {
 				res.setText(Double.toString(parser.parse(res.getText())));
 				
 			} catch (PrologException exception) {
+				System.out.println("fasdlfsjafklsjaf");
 				exception.printStackTrace();
 			}
 		} else {

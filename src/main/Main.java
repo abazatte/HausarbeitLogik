@@ -19,13 +19,14 @@ import helper.Parser;
 
 public class Main {
     public static void main(String[] args) {
-        initialize();
+    	initialize();
     	new Interface();
-    	
-    	
+    	//Parser parser = new Parser();
+    	//System.out.println(Double.toString(parser.parse("sin(4)")));
+    
     }
 
-    private static void initialize() {
+    public static void initialize() {
     	JPL.init();
         Query q1 = new Query("consult", new Term[]{new Atom("lib/calc.pl")});
         System.out.println(q1.hasSolution());
