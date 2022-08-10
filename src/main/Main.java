@@ -13,6 +13,7 @@ import com.github.sh0nk.matplotlib4j.NumpyUtils;
 import com.github.sh0nk.matplotlib4j.Plot;
 import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 
+import Plotter.PlotController;
 import gui.Interface;
 import helper.Parser;
 
@@ -20,8 +21,9 @@ import helper.Parser;
 public class Main {
     public static void main(String[] args) {
         initialize();
-    	new Interface();
-    	
+    	//new Interface();
+    	PlotController plotController = new PlotController();
+    	plotController.testDaten();
     	
     }
 

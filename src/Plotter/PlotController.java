@@ -11,6 +11,7 @@ import com.github.sh0nk.matplotlib4j.Plot;
 import business.Command;
 import business.Cosinus;
 import business.Sinus;
+import helper.Parser;
 
 public class PlotController {
 	private Plot plot;
@@ -82,11 +83,15 @@ public class PlotController {
 
 		for (Double d : x) {
 			// Ergebnis hier:
+			/*
 			String erg = (s.execute(d, d)).toString(); // Hier steht das Ergebnis von Prolog
 			int start = erg.indexOf("=");
 			int end = erg.indexOf("}");
 			
-			werte.add(Double.parseDouble(erg.substring(start + 1, end))) ;
+			werte.add(Double.parseDouble(erg.substring(start + 1, end))) ;*/
+			Parser parser = new Parser();
+			String functionString = parser.xInStringMitDoubleErsetzen(d, "cos(x)");
+			werte.add(parser.parse(functionString));
 		}
 
 		// Testi Test

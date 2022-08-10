@@ -156,7 +156,7 @@ public class Interface extends JFrame implements ActionListener {
 		this.fieldRangeBisX = new HintTextField("Wert bis X:");
 		this.fieldRangeVonY = new HintTextField("Wert von Y:");
 		this.fieldRangeBisY = new HintTextField("Wert bis Y:");
-		
+
 		// Dummy fuer Zeilenumbruch
 		this.panel.add(new JButton());
 
@@ -181,7 +181,7 @@ public class Interface extends JFrame implements ActionListener {
 				if (rangeVonX > rangeBisX ) {
 					throw new MinMaxException();
 				}
-				
+
 
 				StringBuilder s = new StringBuilder();
 				s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).append("\n")
@@ -196,10 +196,8 @@ public class Interface extends JFrame implements ActionListener {
 		});
 
 	}
+
 	
-	private void parseToParser(Double x, String input ) {
-		
-	}
 
 	private void initButtons() {
 
@@ -221,35 +219,35 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("n!"));
 		this.jButtonList.add(new JButton("/"));
 
-		this.jButtonList.add(new JButton("x^y"));
-		this.jButtonList.add(new JButton("7"));
-		this.jButtonList.add(new JButton("8"));
-		this.jButtonList.add(new JButton("9"));
-		this.jButtonList.add(new JButton("*"));
+        this.jButtonList.add(new JButton("x^y"));
+        this.jButtonList.add(new JButton("7"));
+        this.jButtonList.add(new JButton("8"));
+        this.jButtonList.add(new JButton("9"));
+        this.jButtonList.add(new JButton("*"));
 
-		this.jButtonList.add(new JButton("x^2"));
-		this.jButtonList.add(new JButton("4"));
-		this.jButtonList.add(new JButton("5"));
-		this.jButtonList.add(new JButton("6"));
-		this.jButtonList.add(new JButton("-"));
+        this.jButtonList.add(new JButton("x^2"));
+        this.jButtonList.add(new JButton("4"));
+        this.jButtonList.add(new JButton("5"));
+        this.jButtonList.add(new JButton("6"));
+        this.jButtonList.add(new JButton("-"));
 
-		this.jButtonList.add(new JButton("log"));
-		this.jButtonList.add(new JButton("1"));
-		this.jButtonList.add(new JButton("2"));
-		this.jButtonList.add(new JButton("3"));
-		this.jButtonList.add(new JButton("+"));
+        this.jButtonList.add(new JButton("log"));
+        this.jButtonList.add(new JButton("1"));
+        this.jButtonList.add(new JButton("2"));
+        this.jButtonList.add(new JButton("3"));
+        this.jButtonList.add(new JButton("+"));
 
-		this.jButtonList.add(new JButton("ln"));
-		this.jButtonList.add(new JButton("+-"));
-		this.jButtonList.add(new JButton("0"));
-		this.jButtonList.add(new JButton("."));
-		this.jButtonList.add(new JButton("="));
+        this.jButtonList.add(new JButton("ln"));
+        this.jButtonList.add(new JButton("+-"));
+        this.jButtonList.add(new JButton("0"));
+        this.jButtonList.add(new JButton("."));
+        this.jButtonList.add(new JButton("="));
 
-		for (JButton j : jButtonList) {
-			j.setFont(new Font("Arial", Font.PLAIN, 24));
-			j.addActionListener(this);
-			this.panel.add(j);
-		}
+        for (JButton j : jButtonList) {
+            j.setFont(new Font("Arial", Font.PLAIN, 24));
+            j.addActionListener(this);
+            this.panel.add(j);
+        }
 
 		/*
 		 * for (int i = 0; i <= 9; i++) { numbers[i] = new JButton(i + "");

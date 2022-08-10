@@ -21,7 +21,7 @@ public class Parser {
     }
 
     void nextChar() {
-        //gucken ob die nächste pos kleiner als length ist, wir wollen ja im string/char array bleiben
+        //gucken ob die nÃ¤chste pos kleiner als length ist, wir wollen ja im string/char array bleiben
         ch = (++pos < str.length()) ? str.charAt(pos) : -1;
     }
 
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * funktioniert genau so wie eat() aber ohne die position von ch tatsächlich zu verändern
+     * funktioniert genau so wie eat() aber ohne die position von ch tatsÃ¤chlich zu verÃ¤ndern
      *
      * @param charToCheck
      * @return
@@ -56,6 +56,16 @@ public class Parser {
         }
         return ch + offset == charToCheck;
     }
+    
+    public String xInStringMitDoubleErsetzen(Double x, String input ) {
+		String result = "";
+		if(input.contains("x")) {
+			result = input.replace("x", Double.toString(x));
+		}
+		
+		return result;
+	}
+    
 
     public double parse(String str) {
         this.str = str;
@@ -115,7 +125,7 @@ public class Parser {
             x = parseExpression();  //hier drin wird der gesamte Klammerausdruck ausgewertet
             if (!eat(')')) throw new RuntimeException("Missing ')'");
         } else if ((ch >= '0' && ch <= '9') || ch == '.') {
-            // hier wird eine zusammenhängende zahl von einem String zu einem double gemacht
+            // hier wird eine zusammenhÃ¤ngende zahl von einem String zu einem double gemacht
             while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
             x = Double.parseDouble(str.substring(startPos, this.pos));
         } else if (ch >= 'a' && ch <= 'z') { // functions
