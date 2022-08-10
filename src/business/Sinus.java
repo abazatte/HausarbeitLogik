@@ -7,6 +7,7 @@ import org.jpl7.Variable;
 
 import java.util.Map;
 
+
 public class Sinus implements Command {
 	public Double execute(double a, double b) {
 		Variable z = new Variable("Z");
@@ -22,3 +23,24 @@ public class Sinus implements Command {
 		return "sin";
 	}
 }
+
+
+
+/*
+public class Sinus implements Command {
+	public Map<String, Term> execute(double a, double b) {
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("sinus(" + a + "," + z + ")");
+		Query sinus = new Query(term);
+		Map<String, Term> sol = sinus.allSolutions()[0];
+		sinus.close();
+		return sol;
+	}
+
+	@Override
+	public String toString() {
+		return "sin";
+	}
+	
+}
+*/
