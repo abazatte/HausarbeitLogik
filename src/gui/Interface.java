@@ -1,6 +1,8 @@
 package gui;
 
 import business.*;
+import helper.Parser;
+
 import org.jpl7.PrologException;
 
 import com.github.sh0nk.matplotlib4j.NumpyUtils;
@@ -67,6 +69,28 @@ public class Interface extends JFrame implements ActionListener {
 		this.plotController = new PlotController();
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		JButton source = (JButton) e.getSource();
+		if (source == exit) {
+			System.exit(0);
+		} else if (source == AC) {
+			res.setText(null);
+		} else if (source == equals) {
+			try {
+				Parser parser = new Parser();
+				res.setText(Double.toString(parser.parse(res.getText())));
+				
+			} catch (PrologException exception) {
+				exception.printStackTrace();
+			}
+		} else {
+			res.setText(res.getText() + source.getText());
+		
+		}
+	}
+	
+	/**
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
@@ -148,6 +172,7 @@ public class Interface extends JFrame implements ActionListener {
 			}
 		}
 	}
+	*/
 
 	private void initCommands() {
 		this.pl = new Plus();

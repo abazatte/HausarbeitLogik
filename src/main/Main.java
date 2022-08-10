@@ -14,12 +14,15 @@ import com.github.sh0nk.matplotlib4j.Plot;
 import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 
 import gui.Interface;
+import helper.Parser;
 
 
 public class Main {
     public static void main(String[] args) {
         initialize();
     	new Interface();
+    	
+    	
     }
 
     private static void initialize() {
