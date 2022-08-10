@@ -8,5 +8,7 @@ import org.jpl7.Term;
 import java.util.Map;
 
 public interface Command {
-	Double execute(double a, double b);
+	//Map<String, Term> execute(double a, double b);
+	
+	 Double execute(double a, double b);
 }

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import com.github.sh0nk.matplotlib4j.NumpyUtils;
 import com.github.sh0nk.matplotlib4j.Plot;
 
+import business.Command;
+import business.Cosinus;
 import business.Sinus;
 
 public class PlotController {
@@ -50,6 +52,22 @@ public class PlotController {
 		}
 
 		return tmp;
+	}
+	
+	public void plotVorbereiten(Command command, double vonX, double bisX, double vonY, double bisY) {
+		double rangeX = bisX - vonX;
+		double rangeY = bisY - vonY;
+		List<Double> x = NumpyUtils.linspace(rangeX, rangeY, 256);
+		List<Double> input;
+		
+		
+		if(command instanceof Cosinus) {
+			input = x.stream().map(Math::cos).collect(Collectors.toList());
+		} else if(command instanceof Sinus) {
+			input = x.stream().map(Math::sin).collect(Collectors.toList());
+		}
+		
+		
 	}
 
 	public void testDaten() {
