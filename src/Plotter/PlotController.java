@@ -102,5 +102,23 @@ public class PlotController {
 		this.legendeAnzeigen();
 		this.plotAnzeigen();
 	}
+	
+	public void plotExpression(String expression,double beginX, double endX) {
+		List<Double> xValuesList = NumpyUtils.linspace(beginX, endX, 256);
+		List<Double> yValuesList = new ArrayList<>();
+		
+		for(Double d: xValuesList) {
+			Parser parser = new Parser();
+			String functionString = parser.xInStringMitDoubleErsetzen(d, expression);
+			yValuesList.add(parser.parse(functionString));
+		}
+		//this.plot.plot().add(xValuesList).linestyle("-");
+		this.plot.plot().add(yValuesList).linestyle("-");
+		this.setXLabel("X-Achse");
+		this.setYLabel("Y-Achse");
+		this.setTitle("Das ist ein Test");
+		this.legendeAnzeigen();
+		this.plotAnzeigen();
+	}
 
 }

@@ -85,7 +85,10 @@ public class Interface extends JFrame implements ActionListener {
 			res.setText(null);
 		} else if (source.getText().equals("=")) {
 			try {
-				Parser parser = new Parser();
+				if(this.res.getText().contains("x")) {
+					PlotController plotController = new PlotController();
+			    	plotController.plotExpression(this.res.getText(), rangeVonX, rangeBisX);
+				} Parser parser = new Parser();
 				res.setText(Double.toString(parser.parse(res.getText())));
 
 			} catch (PrologException exception) {
