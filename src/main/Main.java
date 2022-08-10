@@ -20,10 +20,14 @@ import helper.Parser;
 public class Main {
     public static void main(String[] args) {
     	initialize();
-    	new Interface();
+    	//new Interface();
     	//Parser parser = new Parser();
     	//System.out.println(Double.toString(parser.parse("sin(4)")));
-    
+
+    	Parser parser = new Parser();
+    	double d = Double.MIN_VALUE;
+    	System.out.println(parser.parse(d + "+1"));
+
     }
 
     public static void initialize() {
