@@ -20,12 +20,14 @@ import helper.Parser;
 public class Main {
     public static void main(String[] args) {
         initialize();
-    	new Interface();
-    	
+    	//new Interface();
+    	Parser parser = new Parser();
+    	double d = Double.MIN_VALUE;
+    	System.out.println(parser.parse(d + "+1"));
     	
     }
 
-    private static void initialize() {
+    public static void initialize() {
     	JPL.init();
         Query q1 = new Query("consult", new Term[]{new Atom("lib/calc.pl")});
         System.out.println(q1.hasSolution());

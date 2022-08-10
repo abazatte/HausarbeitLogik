@@ -5,7 +5,7 @@ import helper.Parser;
 
 import org.jpl7.PrologException;
 
-import com.github.sh0nk.matplotlib4j.NumpyUtils;
+//import com.github.sh0nk.matplotlib4j.NumpyUtils;
 
 import Exception.MinMaxException;
 import Plotter.PlotController;

@@ -6,6 +6,7 @@ public class PrologFormattingHelper {
 	 * <p>example "{Z=0.5}" -> "0.5" </p>
 	 * @param prologResult
 	 * @return
+	 * @author Maximilian Jaesch
 	 */
 	public static double extractDouble(String prologResult) {
 		int start = prologResult.indexOf("=");

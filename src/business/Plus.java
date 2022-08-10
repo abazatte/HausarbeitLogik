@@ -5,7 +5,6 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Plus implements Command {
