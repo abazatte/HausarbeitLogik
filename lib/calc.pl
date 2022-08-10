@@ -51,6 +51,32 @@ tan(X,Z):-
 exponential(E, Z):-
 	Z is exp(E).
 	
+minus_list([],0).
+
+minus_list([H|T], Sum) :-
+	minus_list(T, Rest),
+	Sum is H - Rest.      
+
 ln(E,Z):-
-	Z is log(E).
+	Z is log(E). 
 	
+matrixAdd(M1, M2, M3) :- 
+	maplist(maplist(sumasumarum), M1, M2, M3).
+
+sumasumarum(X,Y,Z) :- Z is X+Y.	
+
+matrixMinus(M1, M2, M3) :- 
+	maplist(maplist(minuminus), M1, M2, M3).
+
+minuminus(X,Y,Z) :- Z is X-Y.	
+
+matrixMal(X,Y,M) :-
+    transpose(Y,T),
+    maplist(row_multiply(T),X,M).
+
+row_multiply(T,X,M) :-
+    maplist(dot_product(X),T,M).
+
+dot_product([X|Xs],[T|Ts],M) :-
+    foldl(mul,Xs,Ts,X*T,M).
+mul(X,T,M,M+X*T).
