@@ -33,7 +33,7 @@ public class Interface extends JFrame implements ActionListener {
 
 	private List<JButton> jButtonList;
 
-	private JButton exponent;
+	private JButton exponent, matrixButton;
 	private JButton numbers[];
 	private JTextField res;
 	private JPanel panel;
@@ -64,13 +64,14 @@ public class Interface extends JFrame implements ActionListener {
 		this.initTextFelder();
 		this.initCommands();
 
-		this.setLayout(new BorderLayout());
-		this.panel.setLayout(new GridLayout(7, 5));
+		this.setLayout(new BorderLayout(20, 20));
+		this.panel.setLayout(new GridLayout(8, 5));
 		this.add(panel, BorderLayout.CENTER);
 		this.add(res, BorderLayout.NORTH);
 		this.setVisible(true);
 		this.setSize(750, 500);
 		this.res.setFont(new Font("Arial", Font.PLAIN, 40));
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.plotController = new PlotController();
 	}
@@ -83,6 +84,11 @@ public class Interface extends JFrame implements ActionListener {
 			}
 		} else if (source.getText().equals("AC")) {
 			res.setText(null);
+
+		} else if (source.getText().equals("Matrix")) {
+
+			MatrixCalc mCalc = new MatrixCalc();
+
 		} else if (source.getText().equals("=")) {
 			try {
 				Parser parser = new Parser();
@@ -152,19 +158,24 @@ public class Interface extends JFrame implements ActionListener {
 	 */
 	private void initTextFelder() {
 
-		this.fieldRangeVonX = new HintTextField("Wert von X:");
-		this.fieldRangeBisX = new HintTextField("Wert bis X:");
-		this.fieldRangeVonY = new HintTextField("Wert von Y:");
-		this.fieldRangeBisY = new HintTextField("Wert bis Y:");
+		// Text zentrieren in Custom Textfield geht nicht
+		this.fieldRangeVonX = new HintTextField("          Wert von X:");
+		this.fieldRangeBisX = new HintTextField("          Wert bis X:");
 
-		// Dummy fuer Zeilenumbruch
-		this.panel.add(new JButton());
-
+		// Felder in Panel adden
 		this.panel.add(fieldRangeVonX);
 		this.panel.add(fieldRangeBisX);
-		this.panel.add(fieldRangeVonY);
-		this.panel.add(fieldRangeBisY);
-		this.panel.add(new JButton());
+
+		// Dummy Buttons fuer UI / Zeilenumbruch
+		this.panel.add(new JLabel());
+
+		// Matrix Button
+		this.matrixButton = new JButton("Matrix");
+		matrixButton.addActionListener(this);
+
+		this.panel.add(matrixButton);
+
+		// Confirm Button
 		JButton confirmButton = new JButton("OK");
 		this.panel.add(confirmButton);
 
@@ -175,17 +186,13 @@ public class Interface extends JFrame implements ActionListener {
 			try {
 				this.rangeVonX = Double.parseDouble(this.fieldRangeVonX.getText());
 				this.rangeBisX = Double.parseDouble(this.fieldRangeBisX.getText());
-				// this.rangeVonY = Double.parseDouble(this.fieldRangeVonY.getText()); wird errechnet
-				// this.rangeBisY = Double.parseDouble(this.fieldRangeBisY.getText()); wird errechnet
 
-				if (rangeVonX > rangeBisX ) {
+				if (rangeVonX > rangeBisX) {
 					throw new MinMaxException();
 				}
 
-
 				StringBuilder s = new StringBuilder();
-				s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).append("\n")
-						.toString();
+				s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).append("\n").toString();
 				System.out.println(s);
 
 			} catch (NumberFormatException nfe) {
@@ -197,7 +204,7 @@ public class Interface extends JFrame implements ActionListener {
 
 	}
 
-	
+
 
 	private void initButtons() {
 
@@ -219,35 +226,35 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("n!"));
 		this.jButtonList.add(new JButton("/"));
 
-        this.jButtonList.add(new JButton("x^y"));
-        this.jButtonList.add(new JButton("7"));
-        this.jButtonList.add(new JButton("8"));
-        this.jButtonList.add(new JButton("9"));
-        this.jButtonList.add(new JButton("*"));
+		this.jButtonList.add(new JButton("x^y"));
+		this.jButtonList.add(new JButton("7"));
+		this.jButtonList.add(new JButton("8"));
+		this.jButtonList.add(new JButton("9"));
+		this.jButtonList.add(new JButton("*"));
 
-        this.jButtonList.add(new JButton("x^2"));
-        this.jButtonList.add(new JButton("4"));
-        this.jButtonList.add(new JButton("5"));
-        this.jButtonList.add(new JButton("6"));
-        this.jButtonList.add(new JButton("-"));
+		this.jButtonList.add(new JButton("x^2"));
+		this.jButtonList.add(new JButton("4"));
+		this.jButtonList.add(new JButton("5"));
+		this.jButtonList.add(new JButton("6"));
+		this.jButtonList.add(new JButton("-"));
 
-        this.jButtonList.add(new JButton("log"));
-        this.jButtonList.add(new JButton("1"));
-        this.jButtonList.add(new JButton("2"));
-        this.jButtonList.add(new JButton("3"));
-        this.jButtonList.add(new JButton("+"));
+		this.jButtonList.add(new JButton("log"));
+		this.jButtonList.add(new JButton("1"));
+		this.jButtonList.add(new JButton("2"));
+		this.jButtonList.add(new JButton("3"));
+		this.jButtonList.add(new JButton("+"));
 
-        this.jButtonList.add(new JButton("ln"));
-        this.jButtonList.add(new JButton("+-"));
-        this.jButtonList.add(new JButton("0"));
-        this.jButtonList.add(new JButton("."));
-        this.jButtonList.add(new JButton("="));
+		this.jButtonList.add(new JButton("ln"));
+		this.jButtonList.add(new JButton("+-"));
+		this.jButtonList.add(new JButton("0"));
+		this.jButtonList.add(new JButton("."));
+		this.jButtonList.add(new JButton("="));
 
-        for (JButton j : jButtonList) {
-            j.setFont(new Font("Arial", Font.PLAIN, 24));
-            j.addActionListener(this);
-            this.panel.add(j);
-        }
+		for (JButton j : jButtonList) {
+			j.setFont(new Font("Arial", Font.PLAIN, 24));
+			j.addActionListener(this);
+			this.panel.add(j);
+		}
 
 		/*
 		 * for (int i = 0; i <= 9; i++) { numbers[i] = new JButton(i + "");
