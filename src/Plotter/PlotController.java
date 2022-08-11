@@ -14,6 +14,12 @@ import business.Cosinus;
 import business.Sinus;
 import helper.Parser;
 
+
+/**
+ * 
+ * @author Berkan Yildiz
+ *
+ */
 public class PlotController {
 	private Plot plot;
 

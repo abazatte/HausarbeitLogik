@@ -15,6 +15,11 @@ public class PrologFormattingHelper {
 		return Double.parseDouble(prologResult.substring(start + 1 , end));
 	}
 	
+	/**
+	 * Author: Abdu
+	 * @param prologResult
+	 * @return
+	 */
 	public static String extractString(String prologResult) {
 		int start = prologResult.indexOf("=");
 		int end = prologResult.indexOf("}");

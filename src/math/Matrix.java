@@ -7,8 +7,6 @@ import org.jpl7.Variable;
 
 import java.util.Map;
 
-import javax.sql.rowset.spi.SyncResolver;
-
 public class Matrix {
 	
 	float m00, m10, m20, m30;
@@ -16,6 +14,26 @@ public class Matrix {
 	float m02, m12, m22, m32;
 	float m03, m13, m23, m33;
 	
+	/**
+	 * Author: Berkan Yildiz
+	 * 
+	 * @param m00 Zelle der Matrix
+	 * @param m10 Zelle der Matrix
+	 * @param m20 Zelle der Matrix
+	 * @param m30 Zelle der Matrix
+	 * @param m01 Zelle der Matrix
+	 * @param m11 Zelle der Matrix
+	 * @param m21 Zelle der Matrix
+	 * @param m31 Zelle der Matrix
+	 * @param m02 Zelle der Matrix
+	 * @param m12 Zelle der Matrix
+	 * @param m22 Zelle der Matrix
+	 * @param m32 Zelle der Matrix
+	 * @param m03 Zelle der Matrix
+	 * @param m13 Zelle der Matrix
+	 * @param m23 Zelle der Matrix
+	 * @param m33 Zelle der Matrix
+	 */
 	public Matrix(float m00, float m10, float m20, float m30,
 			float m01, float m11, float m21, float m31,
 			float m02, float m12, float m22, float m32,
@@ -28,6 +46,13 @@ public class Matrix {
 		
 	}
 	
+	/**
+	 * Author: Abdu
+	 * 
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
 	public static String executeAdd(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixAdd(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
@@ -38,6 +63,13 @@ public class Matrix {
 		return PrologFormattingHelper.extractString(sol.toString());
 	}
 	
+	/**
+	 * Author: Abdu
+	 * 
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
 	public static String executeSub(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixMinus(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
@@ -55,7 +87,10 @@ public class Matrix {
 				+ this.m03 +","+ this.m13 +","+ this.m23 +","+ this.m33 + "]]";
 		return toProlog;
 	}
-
+	
+	/**
+	 * Author: Berkan Yildiz
+	 */
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();

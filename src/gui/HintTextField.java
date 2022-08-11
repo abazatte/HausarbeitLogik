@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author boery
+ * @author Berkan Yildiz
  *Quelle : https://stackoverflow.com/questions/1738966/java-jtextfield-with-input-hint
  */
 

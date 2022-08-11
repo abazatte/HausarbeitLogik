@@ -1,5 +1,11 @@
 package Exception;
 
+
+/**
+ * 
+ * @author Berkan Yildiz
+ *
+ */
 public class MinMaxException extends Exception{
 
 	public MinMaxException(String errorMessage) {

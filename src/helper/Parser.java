@@ -10,6 +10,12 @@ import business.Sinus;
 import business.SquareRoot;
 import business.Tangens;
 
+
+/**
+ * 
+ * @author Maxi
+ *
+ */
 public class Parser {
     private int pos;
     private int ch;

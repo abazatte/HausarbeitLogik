@@ -49,6 +49,9 @@ public class Interface extends JFrame implements ActionListener {
 	private List<Double> x; // Hilfsliste
 	private boolean xPressed; // x = unbekannte. z.B. e^x, sin(x), cos(x), tan(x) usw...
 
+	/**
+	 * Author: Berkan Yildiz
+	 */
 	public Interface() {
 		super("Prolog Calculator");
 		this.jButtonList = new ArrayList<>();
@@ -57,7 +60,6 @@ public class Interface extends JFrame implements ActionListener {
 		this.panel = new JPanel();
 		this.initButtons();
 		this.initTextFelder();
-		this.initCommands();
 
 		this.setLayout(new BorderLayout(20, 20));
 		this.panel.setLayout(new GridLayout(8, 5));
@@ -74,6 +76,9 @@ public class Interface extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Author: Maxi
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
 		if (source.getText().equals("←")) {
@@ -146,17 +151,7 @@ public class Interface extends JFrame implements ActionListener {
 	 *           res.getText(); t += i; res.setText(t); } } } }
 	 */
 
-	private void initCommands() {
-		this.pl = new Plus();
-		this.mu = new Multiplication();
-		this.mo = new Modulo();
-		this.di = new Division();
-		this.cos = new Cosinus();
-		this.sin = new Sinus();
-		this.po = new Power();
-		this.sq = new SquareRoot();
-		this.mi = new Minus();
-	}
+	
 
 	/**
 	 * Author Berkan
@@ -215,6 +210,9 @@ public class Interface extends JFrame implements ActionListener {
 
 
 
+	/**
+	 * Author: Berkan
+	 */
 	private void initButtons() {
 
 		this.jButtonList.add(new JButton("2^nd"));
@@ -265,93 +263,5 @@ public class Interface extends JFrame implements ActionListener {
 			this.panel.add(j);
 		}
 
-		/*
-		 * for (int i = 0; i <= 9; i++) { numbers[i] = new JButton(i + "");
-		 * numbers[i].setFont(new Font("Arial", Font.PLAIN, 40)); panel.add(numbers[i]);
-		 * numbers[i].addActionListener(this); }
-		 * 
-		 * this.klammerAufButton = new JButton("(");
-		 * this.klammerAufButton.addActionListener(this);
-		 * this.klammerAufButton.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(klammerAufButton);
-		 * 
-		 * 
-		 * this.klammerZuButton = new JButton(")");
-		 * this.klammerZuButton.addActionListener(this);
-		 * this.klammerZuButton.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(klammerZuButton);
-		 * 
-		 * this.exponent = new JButton("x"); this.exponent.addActionListener(this);
-		 * this.exponent.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(exponent);
-		 * 
-		 * 
-		 * this.euler = new JButton("e"); this.euler.addActionListener(this);
-		 * this.euler.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(euler);
-		 * 
-		 * 
-		 * this.testButton = new JButton("Plot Test");
-		 * this.testButton.addActionListener(this); this.testButton.setFont(new
-		 * Font("Arial", Font.PLAIN, 12)); this.panel.add(testButton);
-		 * 
-		 * 
-		 * this.plus = new JButton("+"); this.plus.addActionListener(this);
-		 * this.plus.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(plus);
-		 * 
-		 * this.minus = new JButton("-"); this.minus.addActionListener(this);
-		 * this.minus.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(minus);
-		 * 
-		 * this.multiplication = new JButton("*");
-		 * this.multiplication.addActionListener(this); this.multiplication.setFont(new
-		 * Font("Arial", Font.PLAIN, 40)); this.panel.add(multiplication);
-		 * 
-		 * this.division = new JButton("/"); this.division.addActionListener(this);
-		 * this.division.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(division);
-		 * 
-		 * this.modulo = new JButton("%"); this.modulo.addActionListener(this);
-		 * this.modulo.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(modulo);
-		 * 
-		 * this.power = new JButton("^"); this.power.addActionListener(this);
-		 * this.power.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(power);
-		 * 
-		 * this.squareRoot = new JButton("√"); this.squareRoot.addActionListener(this);
-		 * this.squareRoot.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(squareRoot);
-		 * 
-		 * this.cosinus = new JButton("cos"); this.cosinus.addActionListener(this);
-		 * this.cosinus.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(cosinus);
-		 * 
-		 * this.sinus = new JButton("sin"); this.sinus.addActionListener(this);
-		 * this.sinus.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(sinus);
-		 * 
-		 * this.pi = new JButton("π"); this.pi.addActionListener(this);
-		 * this.pi.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(pi);
-		 * 
-		 * this.AC = new JButton("AC"); this.AC.addActionListener(this);
-		 * this.AC.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(AC);
-		 * 
-		 * this.exit = new JButton("off"); this.exit.addActionListener(this);
-		 * this.exit.setFont(new Font("Arial", Font.PLAIN, 40)); this.panel.add(exit);
-		 * 
-		 * this.equals = new JButton("="); this.equals.addActionListener(this);
-		 * this.equals.setFont(new Font("Arial", Font.PLAIN, 40));
-		 * this.panel.add(equals);
-		 */
-
-	}
-
-	private void entry1() {
-		this.entry1 = Double.parseDouble(res.getText());
-		res.setText(null);
-	}
-
-	private void plotten(double vonX, double bisX, double vonY, double bisY) {
-		this.plotController.setXLabel("x");
-		this.plotController.setYLabel("y");
-		this.plotController.setTitle("Ergebnis: ");
-		this.plotController.werteEinlesen(null);
 	}
 }
