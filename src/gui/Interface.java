@@ -22,9 +22,6 @@ public class Interface extends JFrame implements ActionListener {
 	private static double MIN = -100;
 	private static double MAX = 100;
 
-	//TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables machen
-	private JButton plus, minus, modulo, division, power, multiplication, squareRoot, fak, equals, AC, exit, cosinus,
-			sinus, pi, testButton, euler, klammerAufButton, klammerZuButton, deleteLastButton;
 
 	private JTextField fieldRangeVonX, fieldRangeBisX, fieldRangeVonY, fieldRangeBisY;
 	private JLabel labelRangeVonX, labelRangeBisX, labelRangeVonY, labelRangeBisY;
@@ -72,6 +69,9 @@ public class Interface extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		this.plotController = new PlotController();
+		this.rangeVonX = -5;
+		this.rangeBisX = 5;
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -92,8 +92,10 @@ public class Interface extends JFrame implements ActionListener {
 				if(this.res.getText().contains("x")) {
 					PlotController plotController = new PlotController();
 			    	plotController.plotExpression(this.res.getText(), rangeVonX, rangeBisX);
-				} Parser parser = new Parser();
-				res.setText(Double.toString(parser.parse(res.getText())));
+				} else {
+					Parser parser = new Parser();
+					res.setText(Double.toString(parser.parse(res.getText())));
+				}
 
 			} catch (PrologException exception) {
 				System.out.println("fasdlfsjafklsjaf");
@@ -160,8 +162,8 @@ public class Interface extends JFrame implements ActionListener {
 	private void initTextFelder() {
 
 		// Text zentrieren in Custom Textfield geht nicht
-		this.fieldRangeVonX = new HintTextField("          Wert von X:");
-		this.fieldRangeBisX = new HintTextField("          Wert bis X:");
+		this.fieldRangeVonX = new HintTextField("     Wert von X: std:-5");
+		this.fieldRangeBisX = new HintTextField("     Wert bis X: std:5");
 
 		// Felder in Panel adden
 		this.panel.add(fieldRangeVonX);
@@ -185,6 +187,10 @@ public class Interface extends JFrame implements ActionListener {
 
 		confirmButton.addActionListener(e -> {
 			try {
+
+				//System.out.println("vonX empty:" + this.fieldRangeVonX.getText().isEmpty() +
+				//		" bisX empty: ");
+
 				this.rangeVonX = Double.parseDouble(this.fieldRangeVonX.getText());
 				this.rangeBisX = Double.parseDouble(this.fieldRangeBisX.getText());
 
@@ -227,35 +233,35 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("n!"));
 		this.jButtonList.add(new JButton("/"));
 
-        this.jButtonList.add(new JButton("x^y"));
-        this.jButtonList.add(new JButton("7"));
-        this.jButtonList.add(new JButton("8"));
-        this.jButtonList.add(new JButton("9"));
-        this.jButtonList.add(new JButton("*"));
+		this.jButtonList.add(new JButton("x^y"));
+		this.jButtonList.add(new JButton("7"));
+		this.jButtonList.add(new JButton("8"));
+		this.jButtonList.add(new JButton("9"));
+		this.jButtonList.add(new JButton("*"));
 
-        this.jButtonList.add(new JButton("x^2"));
-        this.jButtonList.add(new JButton("4"));
-        this.jButtonList.add(new JButton("5"));
-        this.jButtonList.add(new JButton("6"));
-        this.jButtonList.add(new JButton("-"));
+		this.jButtonList.add(new JButton("x^2"));
+		this.jButtonList.add(new JButton("4"));
+		this.jButtonList.add(new JButton("5"));
+		this.jButtonList.add(new JButton("6"));
+		this.jButtonList.add(new JButton("-"));
 
-        this.jButtonList.add(new JButton("log"));
-        this.jButtonList.add(new JButton("1"));
-        this.jButtonList.add(new JButton("2"));
-        this.jButtonList.add(new JButton("3"));
-        this.jButtonList.add(new JButton("+"));
+		this.jButtonList.add(new JButton("log"));
+		this.jButtonList.add(new JButton("1"));
+		this.jButtonList.add(new JButton("2"));
+		this.jButtonList.add(new JButton("3"));
+		this.jButtonList.add(new JButton("+"));
 
-        this.jButtonList.add(new JButton("ln"));
-        this.jButtonList.add(new JButton("+-"));
-        this.jButtonList.add(new JButton("0"));
-        this.jButtonList.add(new JButton("."));
-        this.jButtonList.add(new JButton("="));
+		this.jButtonList.add(new JButton("ln"));
+		this.jButtonList.add(new JButton("+-"));
+		this.jButtonList.add(new JButton("0"));
+		this.jButtonList.add(new JButton("."));
+		this.jButtonList.add(new JButton("="));
 
-        for (JButton j : jButtonList) {
-            j.setFont(new Font("Arial", Font.PLAIN, 24));
-            j.addActionListener(this);
-            this.panel.add(j);
-        }
+		for (JButton j : jButtonList) {
+			j.setFont(new Font("Arial", Font.PLAIN, 24));
+			j.addActionListener(this);
+			this.panel.add(j);
+		}
 
 		/*
 		 * for (int i = 0; i <= 9; i++) { numbers[i] = new JButton(i + "");
