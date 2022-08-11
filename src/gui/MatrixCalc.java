@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,9 +13,12 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import math.Matrix;
 
 public class MatrixCalc implements ActionListener {
 
@@ -22,6 +27,10 @@ public class MatrixCalc implements ActionListener {
 	private JPanel panelRight;
 	private JPanel panelBottom;
 	private JPanel panelCenter;
+	
+	private Matrix eingabeLinksMatrix;
+	private Matrix eingabeRechtsMatrix;
+	private Matrix ergebnisMatrix;
 	
 	private String operanden[] = {"+", "-", "*", "/"};
 	
@@ -37,6 +46,9 @@ public class MatrixCalc implements ActionListener {
 
 		this.initPanels();
 		this.fillPanels();
+		
+		
+		
 		
 	}
 	
@@ -87,6 +99,7 @@ public class MatrixCalc implements ActionListener {
 			JButton button = new JButton(operanden[i]);
 			button.setHorizontalAlignment(SwingConstants.CENTER);
 			button.setFont(new Font("Arial", Font.PLAIN, 40));
+			button.addActionListener(this);
 			this.panelCenter.add(button);
 			
 		}
@@ -98,8 +111,33 @@ public class MatrixCalc implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		JButton source = (JButton) e.getSource();
+		if(source.getText().equals("+")) {
+			JOptionPane.showMessageDialog(null, " + gedrueckt");
+		} else if(source.getText().equals("-")) {
+			JOptionPane.showMessageDialog(null, " - gedrueckt");
+		} else if(source.getText().equals("*")) {
+			JOptionPane.showMessageDialog(null, " * gedrueckt");
+		} else if(source.getText().equals("/")) {
+			JOptionPane.showMessageDialog(null, " / gedrueckt");
+		}
 
+	}
+	
+	
+	private void initLeftMatrix() {
+		
+		this.panelLeft.getComponent(0);
+		
+		this.eingabeLinksMatrix = new Matrix
+				(0, 0, 0, 0,
+				0, 0, 0, 0,
+				0, 0, 0, 0,
+				0, 0, 0, 0);
+	}
+	
+	private void initRightMatrix() {
+		
 	}
 
 }

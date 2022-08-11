@@ -15,16 +15,25 @@ import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 
 import Plotter.PlotController;
 import gui.Interface;
+import gui.MatrixCalc;
 import helper.Parser;
+import math.Matrix;
 
 
 public class Main {
     public static void main(String[] args) {
         initialize();
-    	//new Interface();
-    	PlotController plotController = new PlotController();
-    	plotController.testDaten();
-    	
+    	new Interface();
+    	//PlotController plotController = new PlotController();
+    	//plotController.testDaten();
+        
+//       Matrix matrix = new Matrix(1, 2, 3, 4,
+//        							5, 6, 7, 8,
+//        							9, 10, 11, 12,
+//        							13, 14, 15, 16);
+//        
+//        System.out.println(matrix);
+//    	
     }
 
     public static void initialize() {
