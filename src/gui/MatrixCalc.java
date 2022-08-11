@@ -36,7 +36,7 @@ public class MatrixCalc implements ActionListener {
 	private Matrix eingabeRechtsMatrix;
 	private Matrix ergebnisMatrix;
 
-	private String operanden[] = { "+", "-", "*", "/" };
+	private String operanden[] = { "+", "-", "*", "L^t", "R^t" };
 
 	/**
 	 * Author: Berkan Yildiz
@@ -46,7 +46,7 @@ public class MatrixCalc implements ActionListener {
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.frame.setTitle("Matrix Calc");
 		this.frame.setVisible(true);
-		this.frame.setLayout(new BorderLayout(20, 20));
+		this.frame.setLayout(new BorderLayout(5, 5));
 		this.frame.setSize(750, 500);
 
 		this.initPanels();
@@ -70,8 +70,8 @@ public class MatrixCalc implements ActionListener {
 		this.frame.add(panelBottom, BorderLayout.SOUTH);
 
 		this.panelCenter = new JPanel();
-		this.panelCenter.setLayout(new GridLayout(4, 1));
-		this.frame.add(panelCenter, BorderLayout.CENTER);
+		this.panelCenter.setLayout(new GridLayout(1, 4));
+		this.frame.add(panelCenter, BorderLayout.NORTH);
 
 	}
 
@@ -88,15 +88,15 @@ public class MatrixCalc implements ActionListener {
 
 			tmp1.setFont(new Font("Arial", Font.PLAIN, 40));
 			tmp2.setFont(new Font("Arial", Font.PLAIN, 40));
-			tmp3.setFont(new Font("Arial", Font.PLAIN, 40));
+			tmp3.setFont(new Font("Arial", Font.PLAIN, 24));
 
 			tmp1.setHorizontalAlignment(JTextField.CENTER);
 			tmp2.setHorizontalAlignment(JTextField.CENTER);
 			tmp3.setHorizontalAlignment(JTextField.CENTER);
 
-			tmp1.setPreferredSize(new Dimension(60, 5));
-			tmp2.setPreferredSize(new Dimension(60, 5));
-			tmp3.setPreferredSize(new Dimension(60, 5));
+			tmp1.setPreferredSize(new Dimension(80, 40));
+			tmp2.setPreferredSize(new Dimension(80, 40));
+			tmp3.setPreferredSize(new Dimension(80, 40));
 
 			this.panelLeft.add(tmp1);
 			this.panelRight.add(tmp2);
@@ -109,7 +109,6 @@ public class MatrixCalc implements ActionListener {
 			button.setFont(new Font("Arial", Font.PLAIN, 40));
 			button.addActionListener(this);
 			this.panelCenter.add(button);
-
 		}
 	}
 
@@ -120,13 +119,15 @@ public class MatrixCalc implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
 		if (source.getText().equals("+")) {
-			JOptionPane.showMessageDialog(null, " + gedrueckt");
+			JOptionPane.showMessageDialog(null, " L + R");
 		} else if (source.getText().equals("-")) {
-			JOptionPane.showMessageDialog(null, " - gedrueckt");
+			JOptionPane.showMessageDialog(null, "L - R");
 		} else if (source.getText().equals("*")) {
-			JOptionPane.showMessageDialog(null, " * gedrueckt");
-		} else if (source.getText().equals("/")) {
-			JOptionPane.showMessageDialog(null, " / gedrueckt");
+			JOptionPane.showMessageDialog(null, " L * R");
+		} else if (source.getText().equals("L^t")) {
+			JOptionPane.showMessageDialog(null, " Linke Matrix transponieren");
+		} else if (source.getText().equals("R^t")) {
+			JOptionPane.showMessageDialog(null, " Rechte Matrix transponieren");
 		}
 
 		this.initLeftMatrix();
@@ -197,50 +198,73 @@ public class MatrixCalc implements ActionListener {
 	 */
 	private void rechneMatrix(String operand) {
 		List<Double> werte = new ArrayList<>();
-		
+
 		if (operand.equals("+")) {
-			
+
 			String erg = Matrix.executeAdd(eingabeLinksMatrix, eingabeRechtsMatrix);
 			werte = this.getWerteVonErgebnis(erg);
-			
-			for(Double d : werte) {
-				System.out.println(d);
-			}
-			
 
 		} else if (operand.equals("-")) {
-			System.out.println(Matrix.executeSub(eingabeLinksMatrix, eingabeRechtsMatrix));
+
+			String erg = Matrix.executeSub(eingabeLinksMatrix, eingabeRechtsMatrix);
+			werte = this.getWerteVonErgebnis(erg);
 
 		} else if (operand.equals("*")) {
 
-		} else if (operand.equals("/")) {
+			String erg = Matrix.executeMult(eingabeLinksMatrix, eingabeRechtsMatrix);
+			werte = this.getWerteVonErgebnis(erg);
+
+		} else if (operand.equals("L^t")) {
+			String erg = Matrix.executeTrans(eingabeLinksMatrix);
+			werte = this.getWerteVonErgebnis(erg);
+
+		} else if (operand.equals("R^t")) {
+			String erg = Matrix.executeTrans(eingabeRechtsMatrix);
+			werte = this.getWerteVonErgebnis(erg);
 
 		}
-		
-		this.ergebnisMatrix = new Matrix(0, 0, 0, 0,
-				0, 0, 0, 0,
-				0, 0, 0, 0,
-				0, 0, 0, 0);
+
+		this.ergebnisMatrix = new Matrix(werte.get(0).floatValue(), werte.get(1).floatValue(),
+				werte.get(2).floatValue(), werte.get(3).floatValue(), werte.get(4).floatValue(),
+				werte.get(5).floatValue(), werte.get(6).floatValue(), werte.get(7).floatValue(),
+				werte.get(8).floatValue(), werte.get(9).floatValue(), werte.get(10).floatValue(),
+				werte.get(11).floatValue(), werte.get(12).floatValue(), werte.get(13).floatValue(),
+				werte.get(14).floatValue(), werte.get(15).floatValue());
+
+		System.out.println(ergebnisMatrix);
+
+		this.printMatrixToJFrame(werte);
 	}
-	
+
 	/**
-	 * 
+	 * Author: Berkan Yildiz
 	 * 
 	 * @param ausdruck der zu evaluieren ist
-	 * @return eine Liste von Doubles die aus dem String "zerfl�ckt" worden sind
+	 * @return eine Liste von Doubles die aus dem String "zerflueckt" worden sind
+	 * 
+	 *         Quelle:
+	 *         https://stackoverflow.com/questions/9381560/parse-multiple-doubles-from-a-string
 	 */
-	private ArrayList<Double> getWerteVonErgebnis(String ausdruck){
+	private ArrayList<Double> getWerteVonErgebnis(String ausdruck) {
 		ArrayList<Double> tmp = new ArrayList();
-		
+
+		// Regulaerer Ausdruck hat ein / aber bei Java macht man //
 		Matcher matcher = Pattern.compile("[-+]?\\d*\\.?\\d+([eE][-+]?\\d+)?").matcher(ausdruck);
 
 		while (matcher.find()) {
 			double element = Double.parseDouble(matcher.group());
+
 			tmp.add(element);
 		}
-		
 		return tmp;
 	}
-	
 
+	private void printMatrixToJFrame(List<Double> ergWerte) {
+		Component[] components = this.panelBottom.getComponents();
+
+		for (int i = 0; i < components.length; i++) {
+			JLabel inhalt = (JLabel) components[i];
+			inhalt.setText(Double.toString(ergWerte.get(i)));
+		}
+	}
 }
