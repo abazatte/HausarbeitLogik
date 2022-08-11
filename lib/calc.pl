@@ -75,13 +75,21 @@ matrixMinus(M1, M2, M3) :-
 
 minuminus(X,Y,Z) :- Z is X-Y.	
 
-matrixMal(X,Y,M) :-
-    transpose(Y,T),
-    maplist(row_multiply(T),X,M).
 
-row_multiply(T,X,M) :-
-    maplist(dot_product(X),T,M).
+dot(V1, V2, N) :- 
+    maplist(multiplication, V1, V2, P),  
+    sumlist(P, N).
 
-dot_product([X|Xs],[T|Ts],M) :-
-    foldl(mul,Xs,Ts,X*T,M).
-mul(X,T,M,M+X*T).
+product(N1,N2, N3) :- 
+    N3 is N1 * N2.
+
+matrixMult(M1, M2, M3) :- 
+    matrixTrans(M2, MT), 
+    maplist(matrixMultHelper(MT), M1, M3).
+
+matrixTrans([R1|Rs],T) :- findall(V,(
+    nth1(Col,R1,_),
+    maplist({Col}/[R,C]>>nth1(Col,R,C),[R1|Rs],V)),T).
+
+matrixMultHelper(M2, I1, M3) :- 
+   maplist(dot(I1), M2, M3).

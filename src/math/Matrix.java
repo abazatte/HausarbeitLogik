@@ -56,9 +56,9 @@ public class Matrix {
 	public static String executeAdd(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixAdd(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
-		Query power = new Query(term);
-		Map<String, Term> sol = power.allSolutions()[0];
-		power.close();
+		Query matrixAdd = new Query(term);
+		Map<String, Term> sol = matrixAdd.allSolutions()[0];
+		matrixAdd.close();
 		
 		return PrologFormattingHelper.extractString(sol.toString());
 	}
@@ -73,13 +73,30 @@ public class Matrix {
 	public static String executeSub(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixMinus(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
-		Query power = new Query(term);
-		Map<String, Term> sol = power.allSolutions()[0];
-		power.close();
+		Query matrixSub = new Query(term);
+		Map<String, Term> sol = matrixSub.allSolutions()[0];
+		matrixSub.close();
 		
 		return PrologFormattingHelper.extractString(sol.toString());
 	}
 
+	/**
+	 * Author: Abdu
+	 *
+	 * @param m1
+	 * @param m2
+	 * @return
+	 */
+	public static String executeMult(Matrix m1, Matrix m2){
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("matrixMult(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
+		Query matrixMult = new Query(term);
+		Map<String, Term> sol = matrixMult.allSolutions()[0];
+		matrixMult.close();
+		
+		return PrologFormattingHelper.extractString(sol.toString());
+	}
+	
 	public String toPrologExecute(){
 		String toProlog = "[[" + this.m00 +","+ this.m10 +","+ this.m20 +","+ this.m30 + "],["
 				+ this.m01 +","+ this.m11 +","+ this.m21 +","+ this.m31 + "],["
