@@ -93,3 +93,4 @@ matrixTrans([R1|Rs],T) :- findall(V,(
 
 matrixMultHelper(M2, I1, M3) :- 
    maplist(dot(I1), M2, M3).
+   

@@ -97,6 +97,20 @@ public class Matrix {
 		return PrologFormattingHelper.extractString(sol.toString());
 	}
 	
+	public static String executeTrans(Matrix m1){
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("matrixTrans(" + m1.toPrologExecute() +  "," + z + ")");
+		Query matrixMult = new Query(term);
+		Map<String, Term> sol = matrixMult.allSolutions()[0];
+		matrixMult.close();
+		
+		return PrologFormattingHelper.extractString(sol.toString());
+	}
+	
+	/**
+	 * Author: Abdu
+	 * @return
+	 */
 	public String toPrologExecute(){
 		String toProlog = "[[" + this.m00 +","+ this.m10 +","+ this.m20 +","+ this.m30 + "],["
 				+ this.m01 +","+ this.m11 +","+ this.m21 +","+ this.m31 + "],["
