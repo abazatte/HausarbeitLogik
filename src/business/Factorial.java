@@ -10,7 +10,7 @@ import java.util.Map;
 public class Factorial implements Command {
 	public Double execute(double a, double b) {
 		Variable z = new Variable("Z");
-		Term term = Term.textToTerm("fak(" + a + "," + z + ")");
+		Term term = Term.textToTerm("fak(" + (int) a + "," + z + ")");
 		Query fak = new Query(term);
 		Map<String, Term> solutionMap = fak.allSolutions()[0];
 		fak.close();

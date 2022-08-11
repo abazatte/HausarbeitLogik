@@ -1,14 +1,6 @@
 package helper;
 
-import business.Cosinus;
-import business.Division;
-import business.Minus;
-import business.Multiplication;
-import business.Plus;
-import business.Power;
-import business.Sinus;
-import business.SquareRoot;
-import business.Tangens;
+import business.*;
 
 
 /**
@@ -72,6 +64,24 @@ public class Parser {
 
         return result;
     }
+    
+    /**
+     * e =  2.7182818284
+     * grosses e wird ignoriert!
+     * pi = 3.1415926535
+     * @param input
+     * @return
+     */
+    public String mathKonstantenErsetzen(String input) {
+    	String result = input;
+    	if(input.contains("e")) {
+    		result = result.replace("e", "(" + Math.E + ")");
+    	}
+    	if(input.contains("π")) {
+    		result = result.replace("π", "(" + Math.PI + ")");
+    	}
+    	return result;
+    }
 
 
     public double parse(String str) {
@@ -110,6 +120,8 @@ public class Parser {
 
             } else if (eat('/')) {
                 x = new Division().execute(x, parseFactor()); // division
+            } else if (eat('%')) {
+            	x = new Modulo().execute(x, parseFactor()); //modulo
             }
         }
         return x;
@@ -150,7 +162,12 @@ public class Parser {
                 x = new Cosinus().execute(x, 0);
             } else if (func.equals("tan")) {
                 x = new Tangens().execute(x, 0);
-            } else throw new RuntimeException("Unknown function: " + func);
+            } else if (func.equals("fak")) {
+            	x = new Factorial().execute(x, 0);
+            } else if (func.equals("ln")) {
+            	;
+            } 
+            else throw new RuntimeException("Unknown function: " + func);
         } else {
             throw new RuntimeException("Unexpected: " + (char) ch);
         }

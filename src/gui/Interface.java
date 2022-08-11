@@ -143,18 +143,23 @@ public class Interface extends JFrame implements ActionListener {
 			MatrixCalc mCalc = new MatrixCalc();
 
 		} else if (source.getText().equals("=")) {
+			String expression = this.res.getText();
+			Parser parser = new Parser();
+			expression = parser.mathKonstantenErsetzen(expression);
 			try {
 				if(this.res.getText().contains("x")) {
 					PlotController plotController = new PlotController();
-			    	plotController.plotExpression(this.res.getText(), rangeVonX, rangeBisX);
+			    	plotController.plotExpression(expression, rangeVonX, rangeBisX);
 				} else {
-					Parser parser = new Parser();
-					res.setText(Double.toString(parser.parse(res.getText())));
+					res.setText(Double.toString(parser.parse(expression)));
 				}
 
 			} catch (PrologException exception) {
-				System.out.println("fasdlfsjafklsjaf");
+				JOptionPane.showMessageDialog(null, "Prolog EXCEPTION");
 				exception.printStackTrace();
+			} catch (RuntimeException eggception) {
+				eggception.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Syntax ERROR");
 			}
 		} else if(source.getText().equals("x^y")) {
 			res.setText(res.getText() + "^");

@@ -77,7 +77,7 @@ minuminus(X,Y,Z) :- Z is X-Y.
 
 
 dot(V1, V2, N) :- 
-    maplist(multiplication, V1, V2, P),  
+    maplist(multiplication, V1, V2, P),
     sumlist(P, N).
 
 product(N1,N2, N3) :- 
