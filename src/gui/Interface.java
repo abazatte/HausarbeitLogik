@@ -274,13 +274,13 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("sin"));
 		this.jButtonList.add(new JButton("cos"));
 		this.jButtonList.add(new JButton("tan"));
-		this.jButtonList.add(new JButton("exp"));
-		this.jButtonList.add(new JButton("mod"));
+		this.jButtonList.add(new JButton());
+		this.jButtonList.add(new JButton("%"));
 
 		this.jButtonList.add(new JButton("sqrt"));
 		this.jButtonList.add(new JButton("("));
 		this.jButtonList.add(new JButton(")"));
-		this.jButtonList.add(new JButton("n!"));
+		this.jButtonList.add(new JButton("fak"));
 		this.jButtonList.add(new JButton("/"));
 
 		this.jButtonList.add(new JButton("x^y"));
