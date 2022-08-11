@@ -1,6 +1,13 @@
 package math;
 
-import javafx.scene.effect.FloatMap;
+import helper.PrologFormattingHelper;
+import org.jpl7.Query;
+import org.jpl7.Term;
+import org.jpl7.Variable;
+
+import java.util.Map;
+
+import javax.sql.rowset.spi.SyncResolver;
 
 public class Matrix {
 	
@@ -21,7 +28,34 @@ public class Matrix {
 		
 	}
 	
+	public static String executeAdd(Matrix m1, Matrix m2){
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("matrixAdd(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
+		Query power = new Query(term);
+		Map<String, Term> sol = power.allSolutions()[0];
+		power.close();
+		
+		return PrologFormattingHelper.extractString(sol.toString());
+	}
 	
+	public static String executeSub(Matrix m1, Matrix m2){
+		Variable z = new Variable("Z");
+		Term term = Term.textToTerm("matrixMinus(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
+		Query power = new Query(term);
+		Map<String, Term> sol = power.allSolutions()[0];
+		power.close();
+		
+		return PrologFormattingHelper.extractString(sol.toString());
+	}
+
+	public String toPrologExecute(){
+		String toProlog = "[[" + this.m00 +","+ this.m10 +","+ this.m20 +","+ this.m30 + "],["
+				+ this.m01 +","+ this.m11 +","+ this.m21 +","+ this.m31 + "],["
+				+ this.m02 +","+ this.m12 +","+ this.m22 +","+ this.m32 + "],["
+				+ this.m03 +","+ this.m13 +","+ this.m23 +","+ this.m33 + "]]";
+		return toProlog;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();

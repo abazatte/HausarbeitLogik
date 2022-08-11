@@ -14,4 +14,11 @@ public class PrologFormattingHelper {
 		
 		return Double.parseDouble(prologResult.substring(start + 1 , end));
 	}
+	
+	public static String extractString(String prologResult) {
+		int start = prologResult.indexOf("=");
+		int end = prologResult.indexOf("}");
+		
+		return prologResult.substring(start + 1 , end);
+	}
 }

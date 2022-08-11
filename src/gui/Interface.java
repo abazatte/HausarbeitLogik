@@ -2,7 +2,6 @@ package gui;
 
 import business.*;
 import helper.Parser;
-import javafx.scene.layout.BorderWidths;
 
 import org.jpl7.PrologException;
 
@@ -23,8 +22,7 @@ public class Interface extends JFrame implements ActionListener {
 	private static double MIN = -100;
 	private static double MAX = 100;
 
-	// TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables
-	// machen
+	//TODO: jbuttons die nicht verwendet werden löschen und mit nur local variables machen
 	private JButton plus, minus, modulo, division, power, multiplication, squareRoot, fak, equals, AC, exit, cosinus,
 			sinus, pi, testButton, euler, klammerAufButton, klammerZuButton, deleteLastButton;
 
@@ -229,35 +227,35 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("n!"));
 		this.jButtonList.add(new JButton("/"));
 
-		this.jButtonList.add(new JButton("x^y"));
-		this.jButtonList.add(new JButton("7"));
-		this.jButtonList.add(new JButton("8"));
-		this.jButtonList.add(new JButton("9"));
-		this.jButtonList.add(new JButton("*"));
+        this.jButtonList.add(new JButton("x^y"));
+        this.jButtonList.add(new JButton("7"));
+        this.jButtonList.add(new JButton("8"));
+        this.jButtonList.add(new JButton("9"));
+        this.jButtonList.add(new JButton("*"));
 
-		this.jButtonList.add(new JButton("x^2"));
-		this.jButtonList.add(new JButton("4"));
-		this.jButtonList.add(new JButton("5"));
-		this.jButtonList.add(new JButton("6"));
-		this.jButtonList.add(new JButton("-"));
+        this.jButtonList.add(new JButton("x^2"));
+        this.jButtonList.add(new JButton("4"));
+        this.jButtonList.add(new JButton("5"));
+        this.jButtonList.add(new JButton("6"));
+        this.jButtonList.add(new JButton("-"));
 
-		this.jButtonList.add(new JButton("log"));
-		this.jButtonList.add(new JButton("1"));
-		this.jButtonList.add(new JButton("2"));
-		this.jButtonList.add(new JButton("3"));
-		this.jButtonList.add(new JButton("+"));
+        this.jButtonList.add(new JButton("log"));
+        this.jButtonList.add(new JButton("1"));
+        this.jButtonList.add(new JButton("2"));
+        this.jButtonList.add(new JButton("3"));
+        this.jButtonList.add(new JButton("+"));
 
-		this.jButtonList.add(new JButton("ln"));
-		this.jButtonList.add(new JButton("+-"));
-		this.jButtonList.add(new JButton("0"));
-		this.jButtonList.add(new JButton("."));
-		this.jButtonList.add(new JButton("="));
+        this.jButtonList.add(new JButton("ln"));
+        this.jButtonList.add(new JButton("+-"));
+        this.jButtonList.add(new JButton("0"));
+        this.jButtonList.add(new JButton("."));
+        this.jButtonList.add(new JButton("="));
 
-		for (JButton j : jButtonList) {
-			j.setFont(new Font("Arial", Font.PLAIN, 24));
-			j.addActionListener(this);
-			this.panel.add(j);
-		}
+        for (JButton j : jButtonList) {
+            j.setFont(new Font("Arial", Font.PLAIN, 24));
+            j.addActionListener(this);
+            this.panel.add(j);
+        }
 
 		/*
 		 * for (int i = 0; i <= 9; i++) { numbers[i] = new JButton(i + "");

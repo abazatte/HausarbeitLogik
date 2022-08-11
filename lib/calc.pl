@@ -59,7 +59,7 @@ minus_list([H|T], Sum) :-
 
 ln(E,Z):-
 	Z is log(E). 
-	
+	 
 matrixAdd(M1, M2, M3) :- 
 	maplist(maplist(sumasumarum), M1, M2, M3).
 
