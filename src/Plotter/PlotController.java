@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.github.sh0nk.matplotlib4j.NumpyUtils;
 import com.github.sh0nk.matplotlib4j.Plot;
+import com.github.sh0nk.matplotlib4j.builder.ContourBuilder;
 
 import business.Command;
 import business.Cosinus;
@@ -112,7 +113,8 @@ public class PlotController {
 			yValuesList.add(parser.parse(functionString));
 		}
 		//this.plot.plot().add(xValuesList).linestyle("-");
-		this.plot.plot().add(yValuesList).linestyle("-");
+		
+		this.plot.plot().add(xValuesList,yValuesList).linestyle("-");
 		this.setXLabel("X-Achse");
 		this.setYLabel("Y-Achse");
 		this.setTitle("Das ist ein Test");

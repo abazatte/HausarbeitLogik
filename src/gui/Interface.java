@@ -101,6 +101,8 @@ public class Interface extends JFrame implements ActionListener {
 				System.out.println("fasdlfsjafklsjaf");
 				exception.printStackTrace();
 			}
+		} else if(source.getText().equals("x^y")) {
+			res.setText(res.getText() + "^");
 		} else {
 			res.setText(res.getText() + source.getText());
 
@@ -239,7 +241,7 @@ public class Interface extends JFrame implements ActionListener {
 		this.jButtonList.add(new JButton("9"));
 		this.jButtonList.add(new JButton("*"));
 
-		this.jButtonList.add(new JButton("x^2"));
+		this.jButtonList.add(new JButton("x"));
 		this.jButtonList.add(new JButton("4"));
 		this.jButtonList.add(new JButton("5"));
 		this.jButtonList.add(new JButton("6"));
