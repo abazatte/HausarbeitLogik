@@ -67,7 +67,7 @@ public class Parser {
     public String xInStringMitDoubleErsetzen(Double x, String input) {
         String result = "";
         if (input.contains("x")) {
-            result = input.replace("x", Double.toString(x));
+            result = input.replace("x", "(" + Double.toString(x) + ")");
         }
 
         return result;

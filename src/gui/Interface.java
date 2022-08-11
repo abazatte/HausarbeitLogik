@@ -14,6 +14,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +36,10 @@ public class Interface extends JFrame implements ActionListener {
 	private JButton numbers[];
 	private JTextField res;
 	private JPanel panel;
+	
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem helpItem;
 
 	private Command pl, mi, mo, di, po, mu, sq, f, cos, sin;
 	private Command last;
@@ -50,7 +58,9 @@ public class Interface extends JFrame implements ActionListener {
 	private boolean xPressed; // x = unbekannte. z.B. e^x, sin(x), cos(x), tan(x) usw...
 
 	/**
-	 * Author: Berkan Yildiz
+	 * @author Berkan Yildiz, Maximilian Jaesch
+	 * <p></p>
+	 *  <a href="https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html"> Quelle Menu </a>
 	 */
 	public Interface() {
 		super("Prolog Calculator");
@@ -66,7 +76,7 @@ public class Interface extends JFrame implements ActionListener {
 		this.add(panel, BorderLayout.CENTER);
 		this.add(res, BorderLayout.NORTH);
 		this.setVisible(true);
-		this.setSize(750, 500);
+		
 		this.res.setFont(new Font("Arial", Font.PLAIN, 40));
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -74,6 +84,46 @@ public class Interface extends JFrame implements ActionListener {
 		this.rangeVonX = -5;
 		this.rangeBisX = 5;
 
+		this.menuBar = new JMenuBar();
+		this.menu = new JMenu("Help");
+		menu.setMnemonic(KeyEvent.VK_H);
+		menu.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte ");
+			}
+		});
+		menuBar.add(menu);
+		this.setJMenuBar(menuBar);
+		
+		
+		this.setSize(750, 500);
 	}
 
 	/**
