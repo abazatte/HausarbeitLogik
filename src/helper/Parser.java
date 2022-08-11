@@ -15,7 +15,7 @@ public class Parser {
     private int ch;
     private String str;
 
-    public Parser(){
+    public Parser() {
         this.pos = -1;
         str = "";
     }
@@ -28,6 +28,7 @@ public class Parser {
     /**
      * es wird geguckt ob der parameter drin ist?, wenn ja dann weiter
      * wenn nein, dann einfach false und die position bleibt dieselbe
+     *
      * @param charToEat
      * @return
      */
@@ -49,29 +50,29 @@ public class Parser {
      * @param charToCheck
      * @return
      */
-    private boolean checkNext(int charToCheck){
+    private boolean checkNext(int charToCheck) {
         int offset = 0;
-        while ((ch + offset) == ' '){
+        while ((ch + offset) == ' ') {
             offset++;
         }
         return ch + offset == charToCheck;
     }
-    
-    public String xInStringMitDoubleErsetzen(Double x, String input ) {
-		String result = "";
-		if(input.contains("x")) {
-			result = input.replace("x", Double.toString(x));
-		}
-		
-		return result;
-	}
-    
+
+    public String xInStringMitDoubleErsetzen(Double x, String input) {
+        String result = "";
+        if (input.contains("x")) {
+            result = input.replace("x", Double.toString(x));
+        }
+
+        return result;
+    }
+
 
     public double parse(String str) {
         this.str = str;
         nextChar();
         double x = parseExpression();
-        if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+        if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char) ch);
         return x;
     }
 
@@ -85,11 +86,10 @@ public class Parser {
     double parseExpression() {
         //es wird erst parseTerm aufgerufen damit wir erst multiplikation und division machen!!!
         double x = parseTerm();
-        while(checkNext('+') || checkNext('-')){
-            if      (eat('+')) {
+        while (checkNext('+') || checkNext('-')) {
+            if (eat('+')) {
                 x = new Plus().execute(x, parseTerm()); // addition
-            }
-            else if (eat('-')) {
+            } else if (eat('-')) {
                 x = new Minus().execute(x, parseTerm()); // subtraction
             }
         }
@@ -98,12 +98,11 @@ public class Parser {
 
     double parseTerm() {
         double x = parseFactor();
-        while(checkNext('*') || checkNext('/')) {
-            if      (eat('*')) {
+        while (checkNext('*') || checkNext('/')) {
+            if (eat('*')) {
                 x = new Multiplication().execute(x, parseFactor()); // multiplication
 
-            }
-            else if (eat('/')) {
+            } else if (eat('/')) {
                 x = new Division().execute(x, parseFactor()); // division
             }
         }
@@ -111,9 +110,9 @@ public class Parser {
     }
 
 
-    /** Generelle Idee: statements werden so case by case aufgenommen, und je nachdem mit was wir anfangen
-     *  zb: zahl oder vorzeichen machen wir was anderes
-     *
+    /**
+     * Generelle Idee: statements werden so case by case aufgenommen, und je nachdem mit was wir anfangen
+     * zb: zahl oder vorzeichen machen wir was anderes
      */
     double parseFactor() {
         if (eat('+')) return +parseFactor(); // unary plus
@@ -138,24 +137,20 @@ public class Parser {
                 x = parseFactor();
             }
             if (func.equals("sqrt")) {
-            	x = new SquareRoot().execute(x, 0);
-            }
-            else if (func.equals("sin")) {
-            	x = new Sinus().execute(x, 0);
-            }
-            else if (func.equals("cos")) {
-            	x = new Cosinus().execute(x, 0);
-            }
-            else if (func.equals("tan")) {
-            	x = new Tangens().execute(x, 0); 
-            }
-            else throw new RuntimeException("Unknown function: " + func);
+                x = new SquareRoot().execute(x, 0);
+            } else if (func.equals("sin")) {
+                x = new Sinus().execute(x, 0);
+            } else if (func.equals("cos")) {
+                x = new Cosinus().execute(x, 0);
+            } else if (func.equals("tan")) {
+                x = new Tangens().execute(x, 0);
+            } else throw new RuntimeException("Unknown function: " + func);
         } else {
-            throw new RuntimeException("Unexpected: " + (char)ch);
+            throw new RuntimeException("Unexpected: " + (char) ch);
         }
 
         if (eat('^')) {
-        	x = new Power().execute(x, parseFactor()); // Potenzrechnung
+            x = new Power().execute(x, parseFactor()); // Potenzrechnung
         }
 
         return x;

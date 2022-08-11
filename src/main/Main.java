@@ -21,9 +21,9 @@ import helper.Parser;
 public class Main {
     public static void main(String[] args) {
         initialize();
-    	new Interface();
-    	//PlotController plotController = new PlotController();
-    	//plotController.testDaten();
+    	//new Interface();
+    	PlotController plotController = new PlotController();
+    	plotController.testDaten();
     	
     }
 

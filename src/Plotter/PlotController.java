@@ -67,8 +67,7 @@ public class PlotController {
 		} else if(command instanceof Sinus) {
 			input = x.stream().map(Math::sin).collect(Collectors.toList());
 		}
-		
-		
+	
 	}
 
 	public void testDaten() {
@@ -95,7 +94,7 @@ public class PlotController {
 		}
 
 		// Testi Test
-		this.plot.plot().add(werte).linestyle("-");
+		this.plot.plot().add(Arrays.asList(1,8,7)).linestyle("-");
 		this.setXLabel("X-Achse");
 		this.setYLabel("Y-Achse");
 		this.setTitle("Das ist ein Test");
