@@ -118,8 +118,8 @@ public class PlotController {
 			String functionString = parser.xInStringMitDoubleErsetzen(d, expression);
 			yValuesList.add(parser.parse(functionString));
 		}
-		//this.plot.plot().add(xValuesList).linestyle("-");
 		
+		//this.plot.plot().add(xValuesList).linestyle("-");
 		this.plot.plot().add(xValuesList,yValuesList).linestyle("-");
 		this.setXLabel("X-Achse");
 		this.setYLabel("Y-Achse");

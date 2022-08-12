@@ -26,6 +26,6 @@ public class CalculatorHelpMenuMouseListener implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte ");
+		JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte sein");
 	}
 }

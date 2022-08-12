@@ -9,6 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,11 +20,15 @@ import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import listener.MatrixHelpMenuMouseListener;
 import math.Matrix;
 
 public class MatrixCalc implements ActionListener {
@@ -31,7 +38,9 @@ public class MatrixCalc implements ActionListener {
 	private JPanel panelRight;
 	private JPanel panelBottom;
 	private JPanel panelCenter;
-
+	
+	private JMenuBar menuBar;
+	private JMenu menu;
 	private Matrix eingabeLinksMatrix;
 	private Matrix eingabeRechtsMatrix;
 	private Matrix ergebnisMatrix;
@@ -47,10 +56,22 @@ public class MatrixCalc implements ActionListener {
 		this.frame.setTitle("Matrix Calc");
 		this.frame.setVisible(true);
 		this.frame.setLayout(new BorderLayout(5, 5));
-		this.frame.setSize(750, 500);
-
+		
+		
 		this.initPanels();
 		this.fillPanels();
+		this.initMenubar();
+		
+		this.frame.setSize(750, 500);
+	}
+	
+	private void initMenubar() {
+		this.menuBar = new JMenuBar();
+		this.menu = new JMenu("Help");
+		menu.setMnemonic(KeyEvent.VK_H);
+		menu.addMouseListener(new MatrixHelpMenuMouseListener());
+		menuBar.add(menu);
+		this.frame.setJMenuBar(menuBar);
 	}
 
 	/**
@@ -242,11 +263,10 @@ public class MatrixCalc implements ActionListener {
 	 * @param ausdruck der zu evaluieren ist
 	 * @return eine Liste von Doubles die aus dem String "zerflueckt" worden sind
 	 * 
-	 *         Quelle:
-	 *         https://stackoverflow.com/questions/9381560/parse-multiple-doubles-from-a-string
-	 */
+	 * Refer to <a href="https://stackoverflow.com/questions/9381560/parse-multiple-doubles-from-a-string">Parse multiple doubles from a String</a> 
+ */
 	private ArrayList<Double> getWerteVonErgebnis(String ausdruck) {
-		ArrayList<Double> tmp = new ArrayList();
+		ArrayList<Double> tmp = new ArrayList<Double>();
 
 		// Regulaerer Ausdruck hat ein / aber bei Java macht man //
 		Matcher matcher = Pattern.compile("[-+]?\\d*\\.?\\d+([eE][-+]?\\d+)?").matcher(ausdruck);

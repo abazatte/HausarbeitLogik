@@ -13,7 +13,7 @@ public class MinMaxException extends Exception{
 	}
 	
 	public MinMaxException() {
-		System.err.println("VON Werte duerfen nicht groesser als BIS Werte");
+		System.err.println("VON Werte duerfen nicht groesser als BIS Werte sein");
 	}
 	
 }

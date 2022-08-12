@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 /**
  * 
  * @author Berkan Yildiz
- *Quelle : https://stackoverflow.com/questions/1738966/java-jtextfield-with-input-hint
+ * Quelle : https://stackoverflow.com/questions/1738966/java-jtextfield-with-input-hint
  */
 
 class HintTextField extends JTextField implements FocusListener {
