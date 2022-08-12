@@ -12,10 +12,18 @@ public class Parser {
     private int pos;
     private int ch;
     private String str;
+    private int roundBy; //standard: 5
 
     public Parser() {
         this.pos = -1;
         str = "";
+        this.roundBy = 5; 
+    }
+    
+    public Parser(int roundBy) {
+    	this.pos = -1;
+        str = "";
+        this.roundBy = roundBy; 
     }
 
     void nextChar() {
@@ -165,8 +173,10 @@ public class Parser {
             } else if (func.equals("fak")) {
             	x = new Factorial().execute(x, 0);
             } else if (func.equals("ln")) {
-            	;
-            } 
+            	x = new NaturalLogarithm().execute(x, 0);
+            } else if (func.equals("round")) {
+            	x = new Round().execute(x, roundBy);
+            }
             else throw new RuntimeException("Unknown function: " + func);
         } else {
             throw new RuntimeException("Unexpected: " + (char) ch);

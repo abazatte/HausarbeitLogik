@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 public class Sinus implements Command {
+	@Override
 	public Double execute(double a, double b) {
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("sinus(" + a + "," + z + ")");

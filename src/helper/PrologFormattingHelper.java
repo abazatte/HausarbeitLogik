@@ -9,7 +9,7 @@ public class PrologFormattingHelper {
 	 * @author Maximilian Jaesch
 	 */
 	public static double extractDouble(String prologResult) {
-		System.out.println("prologDoubleTHing: " + prologResult);
+		//System.out.println("prologDoubleTHing: " + prologResult);
 		int start = prologResult.indexOf("=");
 		int end = prologResult.indexOf("}");
 		

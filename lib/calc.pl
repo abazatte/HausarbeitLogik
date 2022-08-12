@@ -1,5 +1,5 @@
 %
-% Abdus Meisterwerk
+% Abdus Meisterwerk, Maximilian Hilfe
 %
 %
 
@@ -64,7 +64,12 @@ minus_list([H|T], Sum) :-
 
 ln(E,Z):-
 	Z is log(E). 
-	 
+	
+roundNumber(X,Z,NachkommaStellen):-
+	Y is X * 10^NachkommaStellen,
+	round(Y,Ygerundet),  
+	Z is Ygerundet / 10^NachkommaStellen.
+	
 matrixAdd(M1, M2, M3) :- 
 	maplist(maplist(sumasumarum), M1, M2, M3).
 
@@ -80,8 +85,6 @@ dot(V1, V2, N) :-
     maplist(multiplication, V1, V2, P),
     sumlist(P, N).
 
-product(N1,N2, N3) :- 
-    N3 is N1 * N2.
 
 matrixMult(M1, M2, M3) :- 
     matrixTrans(M2, MT), 

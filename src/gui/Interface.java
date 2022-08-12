@@ -22,10 +22,15 @@ import java.util.List;
 
 public class Interface extends JFrame implements ActionListener {
 
-	private JTextField fieldRangeVonX, fieldRangeBisX;
+	private JTextField fieldRangeVonX;
+	private JTextField fieldRangeBisX;
 	private double rangeVonX;
 	private double rangeBisX;
 
+	
+	private JTextField fieldRound;
+	private int nachkommaStellen;
+	
 	private JTextField eingabeTextField;
 	private JPanel panel;
 
@@ -43,16 +48,20 @@ public class Interface extends JFrame implements ActionListener {
 		this.initPanel();
 		this.initEingabeTextField();
 		this.initButtons();
-		this.initTextFelderUndButtons();
+		this.initTextFelderUndButtonsRound();
+		this.initTextFelderUndButtonsMatrix();
 		this.initHelpMenu();
 
 		// Plot werte initialisieren
 		this.rangeVonX = -5;
 		this.rangeBisX = 5;
 
+		// nachkomma runden initialisieren
+		this.nachkommaStellen = 5;
+		
 		// set Size am ende, damit die Help leiste ordentlich angezeigt wird
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(750, 500);
+		this.setSize(750, 700);
 		this.setVisible(true);
 	}
 
@@ -76,7 +85,8 @@ public class Interface extends JFrame implements ActionListener {
 	private void initPanel() {
 		// initPanel
 		this.panel = new JPanel();
-		this.panel.setLayout(new GridLayout(8, 5));
+		//9 zeilen, 5 spalten
+		this.panel.setLayout(new GridLayout(9, 5));
 		this.add(panel, BorderLayout.CENTER);
 	}
 
@@ -96,7 +106,7 @@ public class Interface extends JFrame implements ActionListener {
 			MatrixCalc mCalc = new MatrixCalc();
 		} else if (source.getText().equals("=")) {
 			String expression = this.eingabeTextField.getText();
-			Parser parser = new Parser();
+			Parser parser = new Parser(nachkommaStellen);
 			expression = parser.mathKonstantenErsetzen(expression);
 			try {
 				if (this.eingabeTextField.getText().contains("x")) {
@@ -124,7 +134,7 @@ public class Interface extends JFrame implements ActionListener {
 				}
 				StringBuilder s = new StringBuilder();
 				s.append("von X: ").append(rangeVonX).append(" bis X: ").append(rangeBisX).append("\n").toString();
-				System.out.println(s);
+				JOptionPane.showMessageDialog(null, s);
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(null, " Nur Zahlen eingeben! ");
 			} catch (MinMaxException mme) {
@@ -132,18 +142,45 @@ public class Interface extends JFrame implements ActionListener {
 			}
 		} else if (source.getText().equals("x^y")) {
 			eingabeTextField.setText(eingabeTextField.getText() + "^");
-		} else {
+		} else if (source.getText().equals("update Round")) {
+			try {
+				this.nachkommaStellen = Integer.parseInt(this.fieldRound.getText());
+				JOptionPane.showMessageDialog(null, "Runden auf: " + this.nachkommaStellen + " Nachkommastellen");
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(null, " Nur Zahlen eingeben! ");
+			}	
+		} 
+		else {
 			// normale Zahlen
 			eingabeTextField.setText(eingabeTextField.getText() + source.getText());
-
 		}
 	}
+	/**
+	 * @author Maximilian
+	 */
+	private void initTextFelderUndButtonsRound() {
+		
+		
+		// Dummy label
+		this.panel.add(new JLabel());
+		
+		
+		this.fieldRound = new HintTextField("   nachkomma-Stellen: std:5");
+		this.panel.add(fieldRound);
+		
+		this.panel.add(new JLabel());
+		this.panel.add(new JLabel());
+		
+		JButton updateNachkommaButton = new JButton("update Round");
+		updateNachkommaButton.addActionListener(this);
+		this.panel.add(updateNachkommaButton);
+	}
+	
 
 	/**
-	 * Author Berkan
+	 * Author Berkan,Maximilian
 	 */
-	private void initTextFelderUndButtons() {
-
+	private void initTextFelderUndButtonsMatrix() {
 		// Text zentrieren in Custom Textfield geht nicht
 		this.fieldRangeVonX = new HintTextField("     Wert von X: std:-5");
 		this.fieldRangeBisX = new HintTextField("     Wert bis X: std:5");
@@ -152,7 +189,7 @@ public class Interface extends JFrame implements ActionListener {
 		this.panel.add(fieldRangeVonX);
 		this.panel.add(fieldRangeBisX);
 
-		// Dummy Buttons fuer UI / Zeilenumbruch
+		// Dummy label
 		this.panel.add(new JLabel());
 
 		// Matrix Button
@@ -209,7 +246,7 @@ public class Interface extends JFrame implements ActionListener {
 		jButtonList.add(new JButton("+"));
 
 		jButtonList.add(new JButton("ln"));
-		jButtonList.add(new JButton("+-"));
+		jButtonList.add(new JButton("round"));
 		jButtonList.add(new JButton("0"));
 		jButtonList.add(new JButton("."));
 		jButtonList.add(new JButton("="));

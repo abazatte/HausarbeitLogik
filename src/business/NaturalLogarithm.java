@@ -8,19 +8,16 @@ import org.jpl7.Variable;
 
 import helper.PrologFormattingHelper;
 
-public class Tangens implements Command {
+public class NaturalLogarithm implements Command {
+
 	@Override
 	public Double execute(double a, double b) {
 		Variable z = new Variable("Z");
-		Term term = Term.textToTerm("tan(" + a + "," + z + ")");
-		Query tangens = new Query(term);
-		Map<String, Term> sol = tangens.allSolutions()[0];
-		tangens.close();
+		Term term = Term.textToTerm("ln(" + a + "," + z + ")");
+		Query ln = new Query(term);
+		Map<String, Term> sol = ln.allSolutions()[0];
+		ln.close();
+		
 		return PrologFormattingHelper.extractDouble(sol.toString());
-	}
-
-	@Override
-	public String toString() {
-		return "tan";
 	}
 }

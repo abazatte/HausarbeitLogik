@@ -8,6 +8,7 @@ import org.jpl7.Variable;
 import java.util.Map;
 
 public class Cosinus implements Command {
+	@Override
 	public Double execute(double a, double b) {
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("cosinus(" + a + "," + z + ")");
