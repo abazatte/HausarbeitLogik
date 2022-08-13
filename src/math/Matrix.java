@@ -1,7 +1,11 @@
 package math;
 
 
-
+/**
+ * 
+ * @author Berkan Yildiz
+ *
+ */
 public class Matrix{
 	
 	float m00, m10, m20, m30;
@@ -10,7 +14,6 @@ public class Matrix{
 	float m03, m13, m23, m33;
 	
 	/**
-	 * Author: Berkan Yildiz
 	 * 
 	 * @param m00 Zelle der Matrix
 	 * @param m10 Zelle der Matrix
@@ -50,9 +53,6 @@ public class Matrix{
 		return toProlog;
 	}
 	
-	/**
-	 * Author: Berkan Yildiz
-	 */
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();

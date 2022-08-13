@@ -35,6 +35,12 @@ import business.MatrixTranspose;
 import listener.MatrixHelpMenuMouseListener;
 import math.Matrix;
 
+/**
+ * 
+ * @author Berkan Yildiz
+ *
+ */
+
 public class MatrixCalc implements ActionListener {
 
 	private JFrame frame;
@@ -241,7 +247,7 @@ public class MatrixCalc implements ActionListener {
 				werte = this.getWerteVonErgebnis(erg);
 			}
 			case "R^t" -> {
-				String erg = new MatrixTranspose().execute(eingabeRechtsMatrix, null);
+				String erg = new MatrixTranspose().execute(eingabeLinksMatrix, null);
 				werte = this.getWerteVonErgebnis(erg);
 			}
 		}

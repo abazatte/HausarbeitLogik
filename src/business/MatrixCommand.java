@@ -11,6 +11,4 @@ public interface MatrixCommand {
 	
 	public String execute(Matrix mat1, Matrix mat2);
 
-	
-
 }

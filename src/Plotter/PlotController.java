@@ -51,50 +51,21 @@ public class PlotController {
 		}
 	}
 
-	public List<Double> werteEinlesen(double... werte) {
-		List<Double> tmp = new ArrayList<>();
-
-		// Werte die reinkommen in die liste speichern
-		for (double wert : werte) {
-			tmp.add(wert);
-		}
-
-		return tmp;
-	}
-	
-	public void plotVorbereiten(Command command, double vonX, double bisX, double vonY, double bisY) {
-		double rangeX = bisX - vonX;
-		double rangeY = bisY - vonY;
-		List<Double> x = NumpyUtils.linspace(rangeX, rangeY, 256);
-		List<Double> input;
-		
-		
-		if(command instanceof Cosinus) {
-			input = x.stream().map(Math::cos).collect(Collectors.toList());
-		} else if(command instanceof Sinus) {
-			input = x.stream().map(Math::sin).collect(Collectors.toList());
-		}
-	
-	}
-
 	public void testDaten() {
 		List<Double> x = NumpyUtils.linspace(-Math.PI, Math.PI, 256);
-		
 		// List<Double> C = x.stream().map(Math::cos).collect(Collectors.toList());
 		// List<Double> S = x.stream().map(Math::sin).collect(Collectors.toList());
-		// List<Double> cock = x.stream().map(Math::).collect(Collectors.toList());
+		// Sinus s = new Sinus();
 		
-		Sinus s = new Sinus();
 		List<Double> werte = new ArrayList<Double>();
 
 		for (Double d : x) {
-			// Ergebnis hier:
 			/*
 			String erg = (s.execute(d, d)).toString(); // Hier steht das Ergebnis von Prolog
 			int start = erg.indexOf("=");
-			int end = erg.indexOf("}");
-			
-			werte.add(Double.parseDouble(erg.substring(start + 1, end))) ;*/
+			int end = e
+			werte.add(Double.parseDouble(erg.substring(start + 1, end))) ;
+			*/
 			Parser parser = new Parser();
 			String functionString = parser.xInStringMitDoubleErsetzen(d, "cos(x)");
 			werte.add(parser.parse(functionString));
@@ -123,7 +94,7 @@ public class PlotController {
 		this.plot.plot().add(xValuesList,yValuesList).linestyle("-");
 		this.setXLabel("X-Achse");
 		this.setYLabel("Y-Achse");
-		this.setTitle("Das ist ein Test");
+		this.setTitle(expression);
 		this.legendeAnzeigen();
 		this.plotAnzeigen();
 	}
