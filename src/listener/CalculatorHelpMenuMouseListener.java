@@ -9,18 +9,22 @@ public class CalculatorHelpMenuMouseListener implements MouseListener{
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// Nicht benoetigt
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// Nicht benoetigt
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// Nicht benoetigt
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		// Nicht benoetigt
 	}
 	
 	@Override

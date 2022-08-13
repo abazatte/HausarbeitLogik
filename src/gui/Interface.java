@@ -138,7 +138,7 @@ public class Interface extends JFrame implements ActionListener {
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(null, " Nur Zahlen eingeben! ");
 			} catch (MinMaxException mme) {
-				JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte ");
+				JOptionPane.showMessageDialog(null, " VON Werte duerfen nicht groesser als BIS Werte sein");
 			}
 		} else if (source.getText().equals("x^y")) {
 			eingabeTextField.setText(eingabeTextField.getText() + "^");

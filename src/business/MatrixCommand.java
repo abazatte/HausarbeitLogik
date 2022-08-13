@@ -9,12 +9,8 @@ import math.Matrix;
  */
 public interface MatrixCommand {
 	
-	public String executeAdd(Matrix m1, Matrix m2);
+	public String execute(Matrix mat1, Matrix mat2);
 
-	public String executeSub(Matrix m1, Matrix m2);
-
-	public String executeMult(Matrix m1, Matrix m2);
-
-	public String executeTrans(Matrix m1);
+	
 
 }

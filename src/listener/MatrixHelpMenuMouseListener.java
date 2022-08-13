@@ -5,6 +5,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+/**
+ * 
+ * @author Berkan Yildiz
+ *
+ */
 public class MatrixHelpMenuMouseListener implements MouseListener{
 
 	@Override

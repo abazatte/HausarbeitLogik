@@ -28,6 +28,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import business.MatrixAdd;
+import business.MatrixMul;
+import business.MatrixSub;
+import business.MatrixTranspose;
 import listener.MatrixHelpMenuMouseListener;
 import math.Matrix;
 
@@ -45,7 +49,7 @@ public class MatrixCalc implements ActionListener {
 	private Matrix eingabeRechtsMatrix;
 	private Matrix ergebnisMatrix;
 
-	private String operanden[] = { "+", "-", "*", "L^t", "R^t" };
+	private String operanden[] = { "+", "-", "*", "L^t", "R^t"};
 
 	/**
 	 * Author: Berkan Yildiz
@@ -100,8 +104,6 @@ public class MatrixCalc implements ActionListener {
 	 * Author: Berkan Yildiz
 	 */
 	private void fillPanels() {
-
-		// Scuffed aber von logician ok
 		for (int i = 0; i < 16; i++) {
 			JTextField tmp1 = new JTextField();
 			JTextField tmp2 = new JTextField();
@@ -124,8 +126,8 @@ public class MatrixCalc implements ActionListener {
 			this.panelBottom.add(tmp3);
 		}
 
-		for (int i = 0; i < operanden.length; i++) {
-			JButton button = new JButton(operanden[i]);
+		for (String s : operanden) {
+			JButton button = new JButton(s);
 			button.setHorizontalAlignment(SwingConstants.CENTER);
 			button.setFont(new Font("Arial", Font.PLAIN, 40));
 			button.addActionListener(this);
@@ -220,31 +222,29 @@ public class MatrixCalc implements ActionListener {
 	private void rechneMatrix(String operand) {
 		List<Double> werte = new ArrayList<>();
 
-		if (operand.equals("+")) {
+		switch (operand) {
+			case "+" -> {
+				String erg = new MatrixAdd().execute(eingabeLinksMatrix, eingabeRechtsMatrix);
+				werte = this.getWerteVonErgebnis(erg);
+			}
+			case "-" -> {
+				String erg = new MatrixSub().execute(eingabeLinksMatrix, eingabeRechtsMatrix);
+				werte = this.getWerteVonErgebnis(erg);
+			}
+			case "*" -> {
+				String erg = new MatrixMul().execute(eingabeLinksMatrix, eingabeRechtsMatrix);
+				werte = this.getWerteVonErgebnis(erg);
 
-			String erg = Matrix.executeAdd(eingabeLinksMatrix, eingabeRechtsMatrix);
-			werte = this.getWerteVonErgebnis(erg);
-
-		} else if (operand.equals("-")) {
-
-			String erg = Matrix.executeSub(eingabeLinksMatrix, eingabeRechtsMatrix);
-			werte = this.getWerteVonErgebnis(erg);
-
-		} else if (operand.equals("*")) {
-
-			String erg = Matrix.executeMult(eingabeLinksMatrix, eingabeRechtsMatrix);
-			werte = this.getWerteVonErgebnis(erg);
-
-		} else if (operand.equals("L^t")) {
-			String erg = Matrix.executeTrans(eingabeLinksMatrix);
-			werte = this.getWerteVonErgebnis(erg);
-
-		} else if (operand.equals("R^t")) {
-			String erg = Matrix.executeTrans(eingabeRechtsMatrix);
-			werte = this.getWerteVonErgebnis(erg);
-
+			}
+			case "L^t" -> {
+				String erg = new MatrixTranspose().execute(eingabeLinksMatrix, null);
+				werte = this.getWerteVonErgebnis(erg);
+			}
+			case "R^t" -> {
+				String erg = new MatrixTranspose().execute(eingabeRechtsMatrix, null);
+				werte = this.getWerteVonErgebnis(erg);
+			}
 		}
-
 		this.ergebnisMatrix = new Matrix(werte.get(0).floatValue(), werte.get(1).floatValue(),
 				werte.get(2).floatValue(), werte.get(3).floatValue(), werte.get(4).floatValue(),
 				werte.get(5).floatValue(), werte.get(6).floatValue(), werte.get(7).floatValue(),
@@ -253,7 +253,6 @@ public class MatrixCalc implements ActionListener {
 				werte.get(14).floatValue(), werte.get(15).floatValue());
 
 		System.out.println(ergebnisMatrix);
-
 		this.printMatrixToJFrame(werte);
 	}
 
@@ -270,10 +269,8 @@ public class MatrixCalc implements ActionListener {
 
 		// Regulaerer Ausdruck hat ein / aber bei Java macht man //
 		Matcher matcher = Pattern.compile("[-+]?\\d*\\.?\\d+([eE][-+]?\\d+)?").matcher(ausdruck);
-
 		while (matcher.find()) {
 			double element = Double.parseDouble(matcher.group());
-
 			tmp.add(element);
 		}
 		return tmp;
@@ -281,7 +278,6 @@ public class MatrixCalc implements ActionListener {
 
 	private void printMatrixToJFrame(List<Double> ergWerte) {
 		Component[] components = this.panelBottom.getComponents();
-
 		for (int i = 0; i < components.length; i++) {
 			JLabel inhalt = (JLabel) components[i];
 			inhalt.setText(Double.toString(ergWerte.get(i)));
