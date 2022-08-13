@@ -5,9 +5,11 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.Variable;
 
+import business.MatrixCommand;
+
 import java.util.Map;
 
-public class Matrix {
+public class Matrix implements MatrixCommand{
 	
 	float m00, m10, m20, m30;
 	float m01, m11, m21, m31;
@@ -46,6 +48,10 @@ public class Matrix {
 		
 	}
 	
+	public Matrix() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Author: Abdu
 	 * 
@@ -53,7 +59,8 @@ public class Matrix {
 	 * @param m2
 	 * @return
 	 */
-	public static String executeAdd(Matrix m1, Matrix m2){
+	@Override
+	public String executeAdd(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixAdd(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
 		Query matrixAdd = new Query(term);
@@ -70,7 +77,8 @@ public class Matrix {
 	 * @param m2
 	 * @return
 	 */
-	public static String executeSub(Matrix m1, Matrix m2){
+	@Override
+	public String executeSub(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixMinus(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
 		Query matrixSub = new Query(term);
@@ -87,7 +95,8 @@ public class Matrix {
 	 * @param m2
 	 * @return
 	 */
-	public static String executeMult(Matrix m1, Matrix m2){
+	@Override
+	public String executeMult(Matrix m1, Matrix m2){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixMult(" + m1.toPrologExecute() + "," + m2.toPrologExecute() + "," + z + ")");
 		Query matrixMult = new Query(term);
@@ -97,7 +106,13 @@ public class Matrix {
 		return PrologFormattingHelper.extractString(sol.toString());
 	}
 	
-	public static String executeTrans(Matrix m1){
+	/**
+	 * Author: Abdu
+	 * @param m1
+	 * @return
+	 */
+	@Override
+	public String executeTrans(Matrix m1){
 		Variable z = new Variable("Z");
 		Term term = Term.textToTerm("matrixTrans(" + m1.toPrologExecute() +  "," + z + ")");
 		Query matrixMult = new Query(term);
