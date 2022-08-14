@@ -19,7 +19,12 @@ import gui.MatrixCalc;
 import helper.Parser;
 import math.Matrix;
 
-
+/**
+ * 
+ * 
+ * @author Abdurrahman
+ *
+ */
 public class Main {
     public static void main(String[] args) {
         initialize();

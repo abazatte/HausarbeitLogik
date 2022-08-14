@@ -5,8 +5,9 @@ import business.*;
 
 /**
  * 
- * @author Maxi
+ * @author Maximilian Jaesch
  *
+ *	<p>Source: </p><a href="https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form"> Quelle </a>
  */
 public class Parser {
     private int pos;
@@ -25,16 +26,75 @@ public class Parser {
         str = "";
         this.roundBy = roundBy; 
     }
+    
+    /**
+     * 
+     * 
+     * @author Maximilian Jaesch
+     * @param x
+     * @param input
+     * @return
+     */
+    public String xInStringMitDoubleErsetzen(Double x, String input) {
+        String result = "";
+        if (input.contains("x")) {
+            result = input.replace("x", "(" + Double.toString(x) + ")");
+        }
 
-    void nextChar() {
-        //gucken ob die nÃ¤chste pos kleiner als length ist, wir wollen ja im string/char array bleiben
-        ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+        return result;
+    }
+    
+    /**
+     * e =  2.7182818284
+     * grosses e wird ignoriert!
+     * pi = 3.1415926535
+     * 
+     * @author Maximilian Jaesch
+     * @param input
+     * @return
+     */
+    public String mathKonstantenErsetzen(String input) {
+    	String result = input;
+    	if(input.contains("e")) {
+    		result = result.replace("e", "(" + Math.E + ")");
+    	}
+    	if(input.contains("π")) {
+    		result = result.replace("π", "(" + Math.PI + ")");
+    	}
+    	return result;
+    }
+    
+    /**
+     * @author Maximilian
+     * @param str
+     * @return
+     */
+    public double parse(String str) {
+        this.str = str;
+        nextChar();
+        double x = parseStrichrechnung();
+        if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char) ch);
+        return x;
     }
 
     /**
-     * es wird geguckt ob der parameter drin ist?, wenn ja dann weiter
+     *  @author Maximilian
+     */
+    private void nextChar() {
+        //gucken ob die nächste pos kleiner als length ist, wir wollen ja im string/char array bleiben
+    	if(++pos < str.length()) {
+    		ch = str.charAt(pos);
+    	} else {
+			ch = -1;
+		}
+    }
+
+    /**
+     * es wird geguckt ob der parameter als nächstes ist, wenn ja dann weiter
      * wenn nein, dann einfach false und die position bleibt dieselbe
-     *
+     * 
+     * aus Quelle übernommen
+     * 
      * @param charToEat
      * @return
      */
@@ -51,8 +111,8 @@ public class Parser {
     }
 
     /**
-     * funktioniert genau so wie eat() aber ohne die position von ch tatsÃ¤chlich zu verÃ¤ndern
-     *
+     * funktioniert genau so wie eat() aber ohne die position von ch tatsächlich zu verändern
+     * @author Maximilian Jaesch
      * @param charToCheck
      * @return
      */
@@ -64,63 +124,30 @@ public class Parser {
         return ch + offset == charToCheck;
     }
 
-    public String xInStringMitDoubleErsetzen(Double x, String input) {
-        String result = "";
-        if (input.contains("x")) {
-            result = input.replace("x", "(" + Double.toString(x) + ")");
-        }
-
-        return result;
-    }
     
+
     /**
-     * e =  2.7182818284
-     * grosses e wird ignoriert!
-     * pi = 3.1415926535
-     * @param input
+     * es wird als erstes parsePunkrechnung aufgerufen, damit Punkt vor Strich gewährleistet ist!!!
+     * @author Maximilian Jaesch
      * @return
      */
-    public String mathKonstantenErsetzen(String input) {
-    	String result = input;
-    	if(input.contains("e")) {
-    		result = result.replace("e", "(" + Math.E + ")");
-    	}
-    	if(input.contains("π")) {
-    		result = result.replace("π", "(" + Math.PI + ")");
-    	}
-    	return result;
-    }
-
-
-    public double parse(String str) {
-        this.str = str;
-        nextChar();
-        double x = parseExpression();
-        if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char) ch);
-        return x;
-    }
-
-    // Grammar:
-    // expression = term | expression `+` term | expression `-` term
-    // term = factor | term `*` factor | term `/` factor
-    // factor = `+` factor | `-` factor | `(` expression `)` | number
-    //        | functionName `(` expression `)` | functionName factor
-    //        | factor `^` factor
-
-    double parseExpression() {
-        //es wird erst parseTerm aufgerufen damit wir erst multiplikation und division machen!!!
-        double x = parseTerm();
+    private double parseStrichrechnung() {
+        double x = parsePunktrechnung();
         while (checkNext('+') || checkNext('-')) {
             if (eat('+')) {
-                x = new Plus().execute(x, parseTerm()); // addition
+                x = new Plus().execute(x, parsePunktrechnung()); // addition
             } else if (eat('-')) {
-                x = new Minus().execute(x, parseTerm()); // subtraction
+                x = new Minus().execute(x, parsePunktrechnung()); // subtraction
             }
         }
         return x;
     }
 
-    double parseTerm() {
+    /**
+     * @author Maximilian Jaesch
+     * @return
+     */
+    private double parsePunktrechnung() {
         double x = parseFactor();
         while (checkNext('*') || checkNext('/')) {
             if (eat('*')) {
@@ -139,15 +166,17 @@ public class Parser {
     /**
      * Generelle Idee: statements werden so case by case aufgenommen, und je nachdem mit was wir anfangen
      * zb: zahl oder vorzeichen machen wir was anderes
+     * 
+     * @author Maximilian Jaesch
      */
-    double parseFactor() {
+    private double parseFactor() {
         if (eat('+')) return +parseFactor(); // unary plus
         if (eat('-')) return -parseFactor(); // unary minus
 
         double x;
         int startPos = this.pos;
         if (eat('(')) { // parentheses
-            x = parseExpression();  //hier drin wird der gesamte Klammerausdruck ausgewertet
+            x = parseStrichrechnung();  //hier drin wird der gesamte Klammerausdruck ausgewertet
             if (!eat(')')) throw new RuntimeException("Missing ')'");
         } else if ((ch >= '0' && ch <= '9') || ch == '.') {
             // hier wird eine zusammenhÃ¤ngende zahl von einem String zu einem double gemacht
@@ -157,7 +186,7 @@ public class Parser {
             while (ch >= 'a' && ch <= 'z') nextChar();
             String func = str.substring(startPos, this.pos);
             if (eat('(')) {
-                x = parseExpression();
+                x = parseStrichrechnung();
                 if (!eat(')')) throw new RuntimeException("Missing ')' after argument to " + func);
             } else {
                 x = parseFactor();

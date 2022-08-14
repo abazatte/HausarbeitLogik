@@ -61,7 +61,9 @@ public class Interface extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * @Author Maxi
+	 * das Help Menü wird initialisiert
+	 * 
+	 * @Author Maximilan
 	 */
 	private void initHelpMenu() {
 		// initMenu
@@ -99,7 +101,9 @@ public class Interface extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * @Author: Maxi
+	 * hier werden die Button Clicks ausgewertet und die notwendigen funktionen aufgerufen
+	 * 
+	 * @Author: Maximilian
 	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
