@@ -5,6 +5,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Ausgelagerter MouseListener vom Interface
+ *
+ * @author Berkan Yildiz
+ */
 public class CalculatorHelpMenuMouseListener implements MouseListener{
 	
 	@Override

@@ -6,9 +6,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 
 /**
- * 
- * @author Berkan Yildiz
+ * Ausgelagerter MouseListener vom Interface
  *
+ * @author Berkan Yildiz
  */
 public class MatrixHelpMenuMouseListener implements MouseListener{
 

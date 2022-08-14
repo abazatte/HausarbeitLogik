@@ -14,7 +14,10 @@ public class Matrix{
 	float m03, m13, m23, m33;
 	
 	/**
-	 * 
+	 * Konstruktor der Matrix
+	 *
+	 * @author Berkan Yildiz
+	 *
 	 * @param m00 Zelle der Matrix
 	 * @param m10 Zelle der Matrix
 	 * @param m20 Zelle der Matrix
@@ -43,8 +46,15 @@ public class Matrix{
 		this.m30 = m30; this.m31 = m31; this.m32 = m32; this.m33 = m33;
 		
 	}
-	
 
+
+	/**
+	 * eine "toString" Methode die die Instanzvariablen in Prolog Format zurueckgibt und somit verarbeitet werden kann
+	 *
+	 * @author Berkan Yildiz
+	 *
+	 * @return ein String in Prolog eingabe Syntax
+	 */
 	public String toPrologExecute(){
 		String toProlog = "[[" + this.m00 +","+ this.m10 +","+ this.m20 +","+ this.m30 + "],["
 				+ this.m01 +","+ this.m11 +","+ this.m21 +","+ this.m31 + "],["
@@ -52,7 +62,13 @@ public class Matrix{
 				+ this.m03 +","+ this.m13 +","+ this.m23 +","+ this.m33 + "]]";
 		return toProlog;
 	}
-	
+
+	/**
+	 * Fuer Debug Zwecke eine formatierte toString
+	 *
+	 * @author Berkan Yildiz
+	 * @return formatierten String
+	 */
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();

@@ -23,26 +23,56 @@ import helper.Parser;
 public class PlotController {
 	private Plot plot;
 
+	/**
+	 * Konstruktor des PlotControllers die den plot von Typ Plot instanziiert (mit der create Methode)
+	 *
+	 * @author Berkan Yildiz
+	 */
 	public PlotController() {
 		this.plot = Plot.create();
 	}
 
+	/**
+	 *
+	 *
+	 * @author Berkan Yildiz
+	 * @param label beschreibt die x Achse
+	 */
 	public void setXLabel(String label) {
 		this.plot.xlabel(label);
 	}
 
+	/**
+	 *
+	 *
+	 * @author Berkan Yildiz
+	 * @param label beschreibt die y Achse
+	 */
 	public void setYLabel(String label) {
 		this.plot.ylabel(label);
 	}
 
+	/**
+	 * @author Berkan Yildiz
+	 * @param title beschreibt den titel
+	 */
 	public void setTitle(String title) {
 		this.plot.title(title);
 	}
 
+	/**
+	 * bei aufruf wird eine Legende des Graphen angezeigt
+	 *
+	 * @author Berkan Yildiz
+	 */
 	public void legendeAnzeigen() {
 		this.plot.legend();
 	}
 
+	/**
+	 * Delegation zum anzeigen des Plots
+	 * @author Berkan Yildiz
+	 */
 	public void plotAnzeigen() {
 		try {
 			this.plot.show();
@@ -51,6 +81,12 @@ public class PlotController {
 		}
 	}
 
+
+	/**
+	 * Fuer reine Testzwecke zum schnellen visualiseren
+	 *
+	 * @author Berkan Yildiz
+	 */
 	public void testDaten() {
 		List<Double> x = NumpyUtils.linspace(-Math.PI, Math.PI, 256);
 		// List<Double> C = x.stream().map(Math::cos).collect(Collectors.toList());
@@ -79,7 +115,17 @@ public class PlotController {
 		this.legendeAnzeigen();
 		this.plotAnzeigen();
 	}
-	
+
+	/**
+	 * Die eingehende Funktion wird mit benutzerdefinierten X-Werten (von,bis)
+	 * geplottet.
+	 *
+	 * @author Berkan Yildiz
+	 *
+	 * @param expression die Funktion die geplottet werden soll
+	 * @param beginX start X-Achse
+	 * @param endX ende X-Achse
+	 */
 	public void plotExpression(String expression,double beginX, double endX) {
 		List<Double> xValuesList = NumpyUtils.linspace(beginX, endX, 256);
 		List<Double> yValuesList = new ArrayList<>();

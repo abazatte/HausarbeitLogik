@@ -30,12 +30,12 @@ public class Interface extends JFrame implements ActionListener {
 	private JPanel panel;
 
 	/**
+	 * Konstruktor des Interface
+	 *
 	 * @author Berkan Yildiz, Maximilian Jaesch
 	 *         <p>
+	 *         <a href="https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html"> Quelle Menu </a>
 	 *         </p>
-	 *         <a href=
-	 *         "https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html">
-	 *         Quelle Menu </a>
 	 */
 	public Interface() {
 		super("Prolog Calculator");
@@ -60,6 +60,9 @@ public class Interface extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
+	/**
+	 * @Author Maxi
+	 */
 	private void initHelpMenu() {
 		// initMenu
 		JMenuBar menuBar = new JMenuBar();
@@ -70,6 +73,11 @@ public class Interface extends JFrame implements ActionListener {
 		this.setJMenuBar(menuBar);
 	}
 
+	/**
+	 * Initialisierung von den Eingabefeld
+	 *
+	 * @Author Berkan Yildiz
+	 */
 	private void initEingabeTextField() {
 		// initEingabeTextField
 		this.eingabeTextField = new JTextField(13);
@@ -77,6 +85,11 @@ public class Interface extends JFrame implements ActionListener {
 		this.add(eingabeTextField, BorderLayout.NORTH);
 	}
 
+	/**
+	 * Initialisierung des JPanels
+	 *
+	 * @Author Berkan Yildiz
+	 */
 	private void initPanel() {
 		// initPanel
 		this.panel = new JPanel();
@@ -86,7 +99,7 @@ public class Interface extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Author: Maxi
+	 * @Author: Maxi
 	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
@@ -141,7 +154,7 @@ public class Interface extends JFrame implements ActionListener {
 	 * Wenn confirm Button geklickt wird, dann werden die Plot Werte: von X , bis X
 	 * uebernommen.
 	 * 
-	 * @author Berkan
+	 * @author Berkan Yildiz
 	 */
 	private void updatePlotXValues() {
 		//
@@ -285,12 +298,16 @@ public class Interface extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Author Berkan, Maximilian
+	 * Initialisiert Textfeld wo man X Von, Bis Werte eingetragen werden.
+	 * Initialisert Button um Matrix View zu oeffnen
+	 *
+	 * @Author Berkan, Maximilian
 	 */
 	private void initTextFelderUndButtonsMatrix() {
 		// init HintTextField
 		this.fieldRangeVonX = new HintTextField("Wert von X: std:-5");
 		this.fieldRangeBisX = new HintTextField("Wert bis X: std:5");
+		
 		// Text zentrieren 
 		this.fieldRangeVonX.setHorizontalAlignment(JTextField.CENTER);
 		this.fieldRangeBisX.setHorizontalAlignment(JTextField.CENTER);
@@ -320,7 +337,7 @@ public class Interface extends JFrame implements ActionListener {
 	 * fügt die Buttons des Taschenrechners in der richtigen Reihenfolge hinzu und
 	 * setzt deren Listener.
 	 * 
-	 * @author max Berkan
+	 * @author Berkan Yildiz
 	 * 
 	 */
 	private void initButtons() {

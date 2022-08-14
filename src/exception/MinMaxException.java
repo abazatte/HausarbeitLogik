@@ -2,7 +2,9 @@ package exception;
 
 
 /**
- * 
+ * Benutzerdefinierte Exception
+ * (Min Eingabewerte duerfen nicht groesser sein als die max Eingabewerte)
+ *
  * @author Berkan Yildiz
  *
  */

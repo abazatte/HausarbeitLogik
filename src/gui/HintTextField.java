@@ -9,6 +9,8 @@ import javax.swing.JTextField;
  * 
  * @author Berkan Yildiz
  * Quelle : https://stackoverflow.com/questions/1738966/java-jtextfield-with-input-hint
+ *
+ * Aus Design gruenden wurde ein Button benoetigt, der einen Hint als preset Text hat, damit der Nutzer weiss, was er einzugeben hat
  */
 
 class HintTextField extends JTextField implements FocusListener {
